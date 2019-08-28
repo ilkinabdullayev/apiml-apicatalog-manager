@@ -1,0 +1,41 @@
+ {
+    "name": "API Mediation Layer - API Catalog manager",
+    "version": "1.0",
+    "description": "You could start and stop dynamic services!",
+    "permissions": [
+      "tabs", 
+      "activeTab",
+       "declarativeContent", 
+       "storage",
+       "http://*/*",
+       "https://*/*"
+      ],
+      "web_accessible_resources": ["banner/append_banner.html"],
+    "manifest_version": 2,
+    "background": {
+      "scripts": ["background.js"],
+      "persistent": false
+    },
+    "browser_action": {
+      "default_popup": "popup.html",
+      "default_icon": {
+        "16": "images/logo-16.png",
+        "32": "images/logo-32.png",
+        "48": "images/logo-48.png",
+        "128": "images/logo-128.png"
+      }
+    },
+    "content_scripts": [
+      {
+        "matches": ["https://localhost:10010/ui/v1/apicatalog/*"],
+        "js": ["contentScript.js"]
+      }
+    ],   
+    "icons": {
+      "16": "images/logo-16.png",
+      "32": "images/logo-32.png",
+      "48": "images/logo-48.png",
+      "128": "images/logo-128.png"
+    }
+  }
+
