@@ -12,7 +12,7 @@
     padding: 5px 0;
     margin: 0;
     text-shadow: 1px 1px 0 rgba(255,255,255,0.5);
-    font-size: 0.85em;
+    font-size: 1.5em;
     border: 1px solid #CCCCCC;
     border-bottom: none;
   
@@ -41,7 +41,7 @@
     list-style: none;
     background: #141414;
     color: #45D40C;
-    font: 0.8em 'Andale Mono', Consolas, 'Courier New';
+    font: 1.45em 'Andale Mono', Consolas, 'Courier New';
     line-height: 1.6em;
     -webkit-border-bottom-right-radius: 3px;
     -webkit-border-bottom-left-radius: 3px;
@@ -49,13 +49,6 @@
     -moz-border-radius-bottomleft: 3px;
     border-bottom-right-radius: 3px;
     border-bottom-left-radius: 3px;
-  }
-  
-  .shell-body li:before {
-    content: '$';
-    position: absolute;
-    left: 0;
-    top: 0;
   }
   
   .shell-body li {

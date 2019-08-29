@@ -22,7 +22,7 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
         return;
       }
 
-     alert(url);
+    // alert(url);
   }
 });
 
