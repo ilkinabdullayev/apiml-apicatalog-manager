@@ -1,39 +1,25 @@
 'use strict';
 
-const NAVIGATE_BUTTONS = document.getElementById('navigateButtons');
+let openApiCatalogButton = document.getElementById('openApiCatalogButton');
+let openJESShellButton = document.getElementById('openJESShellButton');
+let consoleToggleButton = document.getElementById('consoleToggleButton');
+let eurekaToggleButton = document.getElementById('eurekaToggleButton');
 
-function init() {
-    let hosts = JSON.parse(localStorage.getItem("hosts")) || [];
-    if (hosts.length == 0) {
-        let button = document.createElement('button');
-        button.setAttribute('class', 'btn btn-warning btn-sm');
-        button.setAttribute('style', 'width: 100%;margin-bottom: 5px');
-        button.innerHTML = '<i class="glyphicon glyphicon-cog"></i>\n' +
-            '                    &nbsp;\n' +
-            '                    Configuration is need';
-
-        button.onclick = function(){
-            chrome.tabs.update({ 'url': 'chrome://extensions/?options=' + chrome.runtime.id });
-        };
-
-        NAVIGATE_BUTTONS.appendChild(button);
-
-        document.getElementById('popupActionFooter').style.display = 'none';
-    }
-
-
-    for (var i = 0; i < hosts.length; i++) {
-        let button = document.createElement('button');
-        button.setAttribute('data-url', hosts[i].gatewayUrl);
-        button.setAttribute('class', 'btn btn-success btn-sm');
-        button.setAttribute('style', 'width: 100%;margin-bottom: 5px');
-        button.innerText = hosts[i].gatewayUrl;
-
-        button.onclick = function(){
-            chrome.tabs.update(null, { url: this.getAttribute('data-url') + '/ui/v1/apicatalog'});
-        };
-
-        NAVIGATE_BUTTONS.appendChild(button);
-    }
+openApiCatalogButton.onclick = function(element) {
+    chrome.tabs.update(null, { url: 'https://localhost:10010/ui/v1/apicatalog'});
+    // chrome.tabs.onload(openApiCatalogButton.remove())
+    chrome.tabs.onUpdated.addListener(function (tabId , info) {
+        if (info.status === 'complete') {
+            openApiCatalogButton.remove()
+            consoleToggleButton.hidden = false;
+            eurekaToggleButton.hidden = false;
+        }
+    });
 }
-init();
+
+openJESShellButton.onclick = function(element) {
+    chrome.tabs.create({ url:'javascript:document.write(\"<iframe style=\"width:100%;height:540px;background:black;border:none\"></iframe>\")'});
+}
+
+
+//style="width=100%;height:540px;background:black;border:none" src="banner/append_banner.html"

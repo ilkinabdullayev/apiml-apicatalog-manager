@@ -1,19 +1,33 @@
 <!DOCTYPE html>
 <html>
   <head>
-      <link rel="stylesheet" href="../statics/normalize.min.css"/>
-      <link rel="stylesheet" href="../statics/bootstrap.min.css"/>
+    <style>
+      button {
+        height: 30px;
+        width: 30px;
+        outline: none;
+      }
+    </style>
   </head>
   <body>
-  <div class="panel panel-default" style="min-width: 300px;margin: 0px!important">
-      <div class="panel-heading" style="font-weight: bold">API Catalog management plugin v1.5.0</div>
-      <div class="panel-body">
-          <div id="navigateButtons"></div>
-      </div>
-      <div class="panel-footer" id="popupActionFooter">
-          <label class="checkbox-inline"><input type="checkbox" value="">Hide Panel</label>
-      </div>
-  </div>
+   <div style="width:300px;height:120px;/*border: 1px solid red*/">
+        <h3 style="text-align: center">API Catalog management plugin v1.5.0</h2>
+        <button id="openApiCatalogButton" style="width: 100%">Open API Catalog</button>
+        <button id="openJESShellButton" style="width: 100%">Open JES2 Shell</button>
+        <button id="consoleToggleButton" style="width: 100%" hidden="true">Console
+            <label class="switch" style="width: 100%">
+                <input type="checkbox">
+                <span class="slider"></span>
+            </label>
+        </button>
+        <button id="eurekaToggleButton" style="width: 100%" hidden="true">Eureka
+            <label class="switch" style="width: 100%">
+                <input type="checkbox">
+                <span class="slider"></span>
+            </label>
+        </button>
+
+   </div>
    <script src="popup.js"></script>
   </body>
 </html>
