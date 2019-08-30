@@ -1,0 +1,28 @@
+body {
+    background-color: #171722;
+  }
+  
+  .grid {
+    display: grid;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .small {
+    font-size: 10px;
+  }
+  
+  .drop-container:hover .drop {
+    display: block;
+  }
+  .drop-container .drop {
+    display: none;
+    position: absolute;
+    top: 20px;
+    left: 8px;
+  }
+  .drop-container .drop a {
+    display: block;
+    padding: 8px 16px;
+  }
+  

@@ -11,6 +11,7 @@ console.log(x);
 //when tab content is updated
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
   const url = tab.url;
+  console.log('tab', tab);
   console.log('changeInfo.status', changeInfo.status);
   if (url !== undefined && changeInfo.status == "complete") {
       //check the hostname too
@@ -22,7 +23,11 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
         return;
       }
 
-    // alert(url);
+     //alert(url);
+     /*chrome.tabs.executeScript(null, {
+       code: "alert('xiyar');"
+     });*/
+
   }
 });
 
@@ -36,7 +41,5 @@ function isExcludeService(url) {
 
   return found;
 }
-
-
 
 

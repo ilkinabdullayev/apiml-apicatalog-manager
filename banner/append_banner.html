@@ -1,19 +1,81 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" href="banner.css" />
+    <link rel="stylesheet" href="../statics/normalize.min.css" />
+    <link rel="stylesheet" href="../statics/bootstrap.min.css" />
+    <link rel="stylesheet" href="../statics/tachyons.css" />
+    <link rel="stylesheet" href="shell.css" />
     <link rel="stylesheet" href="breadcrumb.css" />
   </head>
   <body style="margin: 0px;overflow: hidden;">
+    <!---Tabs-->
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
+          aria-selected="true">JES2</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
+          aria-selected="false">APIML Discovery</a>
+      </li>
+    </ul>
+    <!---Tabs-->
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">Raw denim you
+        probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master
+        cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro
+        keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip
+        placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi
+        qui.</div>
+      <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">Food truck fixie
+        locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit,
+        blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee.
+        Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum
+        PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS
+        salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit,
+        sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester
+        stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</div>
+      <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">Etsy mixtape
+        wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack
+        lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard
+        locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify
+        squid 8-bit cred pitchfork. Williamsburg banh mi whatever gluten-free, carles pitchfork biodiesel fixie
+        etsy retro mlkshk vice blog. Scenester cred you probably haven't heard of them, vinyl craft beer blog
+        stumptown. Pitchfork sustainable tofu synth chambray yr.</div>
+    </div>
+    <!---Filter-->
+    <ol class="breadcrumb" style="margin: 0;border-radius: 0!important">
+      <li class="relative drop-container">
+        <span href="#">Jobs <span class="glyphicon glyphicon-triangle-bottom small" aria-hidden="true"></span></span>
+        <div class="drop bg-white">
+            <ul id="jobsDropdown" class="list pl0">
+                <!---<li><a href="#">No item selected</a></li>-->
+            </ul>
+        </div>
+    </li>
+
+      <li><a href="#">MAS2BAC1</a></li>
+      <li><a href="#">STC24651</a></li>
+
+
+      <li class="active relative drop-container">
+          <span href="#">STC24651 <span class="glyphicon glyphicon-triangle-bottom small" aria-hidden="true"></span></span>
+          <div class="drop bg-white">
+              <ul class="list pl0">
+                  <li><a href="#">STC246512</a></li>
+                  <li><a href="#">STC246514</a></li>
+              </ul>
+          </div>
+      </li>
+   </ol>
+   <!---Filter-->
+  <!---Banner-->
     <div class="shell-wrap">
-      <p class="shell-top-bar">
-        MAS2BAC1 logs
-      </p>
       <ul id="zosShell" class="shell-body">
         <li>Please wait. It's fetching from service...</li>
       </ul>
     </div>
+    <!---Banner-->
     <script type="text/javascript" src="banner.js"></script>
-    <script type="text/javascript" src="breadcrumb.js"></script>
   </body>
 </html>
