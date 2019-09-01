@@ -1,13 +1,3 @@
-body {
-    background-color: #171722;
-  }
-  
-  .grid {
-    display: grid;
-    align-items: center;
-    height: 100vh;
-  }
-  
   .small {
     font-size: 10px;
   }
