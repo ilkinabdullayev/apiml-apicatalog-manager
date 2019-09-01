@@ -26,11 +26,14 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
                        return;
                      }
 
-                     if(isExcludeService(url)) {
-                       return;
-                     }
+                     // if(isExcludeService(url)) {
+                     //   return;
+                     // }
 
                    //  alert(tabs[0].url);
+                   //   chrome.tabs.executeScript({
+                   //       file: 'contentScript.js'
+                   //   });
 
                      let urlPatches = url.split("/");
                      chrome.tabs.sendMessage(tabs[0].id,
@@ -44,9 +47,24 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
     }, 3000);
 });
 
+function checkHostnames(url) {
+    let isPassed = false;
+    chrome.storage.sync.get("hostnames", function(result){
+        // Shows variable
+        let hostnames = result.hostnames || [];
+        hostnames.forEach(item => {
+            if(url.includes(item.hostUrl)) {
+                isPassed = true;
+            }
+        });
+    });
+
+    return isPassed;
+}
+
 function isExcludeService(url) {
   let found = false;
-  EXCLUDED_SERVICES_MATHES.forEach((item, index) => {
+  EXCLUDED_SERVICES_MATHES.forEach(item => {
     if(url.includes(item)) {
        found = true;
     }

@@ -4,7 +4,7 @@ const JOBS_DROPDOWN = document.getElementById("jobsDropdown");
 function get(url, onComplete) {
     var xhttp = new XMLHttpRequest();
     xhttp.open('GET', url);
-    xhttp.setRequestHeader("Authorization", "Basic YWJkaWwwMTpqZXRvbjMyMQ==");
+    xhttp.setRequestHeader("Authorization", "Basic DIGEST");
     xhttp.setRequestHeader("Accept", "application/json");
     xhttp.onload = function() {
         if(xhttp.status == "200") {
@@ -18,7 +18,7 @@ function get(url, onComplete) {
 }
 
 function fillShell() {
-    get('https://usilca32.ca.com:60004/api/v1/jobs/MAS2BAC1/STC24651/files/103/content',
+    get('SERVICE_URL',
     (response) => {
         const jsonResponse = JSON.parse(response.responseText);
         const data = jsonResponse.content;
@@ -32,7 +32,7 @@ function fillShell() {
 }
 
 function fillJobDropdowns() {
-    get('https://usilca32.ca.com:60004/api/v1/jobs?owner=*&prefix=MAS2*',
+    get('SERVICE_URL',
     (response) => {
         const jsonResponse = JSON.parse(response.responseText);
         const data = jsonResponse.items;
