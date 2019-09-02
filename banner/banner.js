@@ -1,24 +1,7 @@
 const JES_SHELL = document.getElementById("jesShell");
-const JOBS_DROPDOWN = document.getElementById("jobsDropdown");
-
-function get(url, onComplete) {
-    var xhttp = new XMLHttpRequest();
-    xhttp.open('GET', url);
-    xhttp.setRequestHeader("Authorization", "Basic DIGEST");
-    xhttp.setRequestHeader("Accept", "application/json");
-    xhttp.onload = function() {
-        if(xhttp.status == "200") {
-            console.log('jsonResponse', xhttp.responseText);
-            onComplete(xhttp);
-        }
-    };
-
-    xhttp.send();
-   // xhttp.send("Your JSON Data Here");
-}
 
 function fillShell() {
-    get('SERVICE_URL',
+    get('https://localhost:8443/api/v1/jobs/MAS2BAC1/STC62065/files/103/content',
     (response) => {
         const jsonResponse = JSON.parse(response.responseText);
         const data = jsonResponse.content;
@@ -26,38 +9,12 @@ function fillShell() {
         clearShell();
 
         lines.forEach((item, index) => {
-            addElementToList(item);
+            addItemToJES(item);
         });
     });
 }
 
-function fillJobDropdowns() {
-    get('SERVICE_URL',
-    (response) => {
-        const jsonResponse = JSON.parse(response.responseText);
-        const data = jsonResponse.items;
-
-        for(var index in data) {
-            addElementToDropdownList(data[index].jobName);
-        }
-    });
-}
-
-function addElementToDropdownList(text) {
-    const li = document.createElement("li");
-
-    const link = document.createElement('a');
-    const linkText = document.createTextNode(text);
-    link.appendChild(linkText);
-
-    link.title = text;
-    link.href = "#";
-
-    li.appendChild(link);
-    JOBS_DROPDOWN.appendChild(li);
-}
-
-function addElementToList(text) {
+function addItemToJES(text) {
     const li = document.createElement("li");
     li.appendChild(document.createTextNode(text));
     JES_SHELL.appendChild(li);
@@ -69,33 +26,4 @@ function clearShell() {
     }
 }
 
-fillJobDropdowns();
 fillShell();
-
-
-//Eureka
-function initializeEureka() {
-    let serviceId = getParamValue('serviceId');
-    serviceId = (serviceId == 'dashboard') ? '' : '/' + serviceId;
-    get('https://localhost:10011/eureka/apps' + serviceId,
-    (response) => {
-        const jsonResponse = JSON.parse(response.responseText);
-
-        const jsonViewer = new JSONViewer();
-        document.getElementById('eureka-panel').appendChild(jsonViewer.getContainer());
-        jsonViewer.showJSON(jsonResponse);
-    });
-}
-
-initializeEureka();
-
-//General Utils
-function getParamValue(paramName) {
-    let url = window.location.search.substring(1); //get rid of "?" in querystring
-    let qArray = url.split('&'); //get key-value pairs
-    for (const i = 0; i < qArray.length; i++) {
-        let pArr = qArray[i].split('='); //split key and value
-        if (pArr[0] == paramName)
-            return pArr[1]; //return value
-    }
-}

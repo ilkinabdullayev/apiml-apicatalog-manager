@@ -27,6 +27,9 @@
     <li class="nav-item">
         <a class="nav-link" href="#discovery">APIML Discovery</a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#staticinstances">APIML Static Instances</a>
+    </li>
 </ul>
 <!--Nav Tab Headers-->
 <!--Nav Tab Sections-->
@@ -34,17 +37,23 @@
     <div class="tab-pane show active" id="jes">
         <!---Filter-->
         <ol class="breadcrumb" style="margin: 0;border-radius: 0!important">
+            <li>APIML Jobs</li>
             <li class="relative drop-container">
-                <span href="#">Jobs <span class="glyphicon glyphicon-triangle-bottom small"
+                <span href="#">Job Names<span class="glyphicon glyphicon-triangle-bottom small"
                                           aria-hidden="true"></span></span>
                 <div class="drop bg-white">
-                    <ul id="jobsDropdown" class="list pl0">
-                        <!---<li><a href="#">No item selected</a></li>-->
-                    </ul>
+                    <ul id="jobNamesDropdown" class="list pl0"></ul>
                 </div>
             </li>
 
-            <li><a href="#">MAS2BAC1</a></li>
+            <li class="relative drop-container">
+                <span href="#">Job Ids<span class="glyphicon glyphicon-triangle-bottom small"
+                                          aria-hidden="true"></span></span>
+                <div class="drop bg-white">
+                    <ul id="jobIdsDropdown" class="list pl0"></ul>
+                </div>
+            </li>
+
             <li><a href="#">STC24651</a></li>
             <li class="active relative drop-container">
                 <span href="#">STC24651 <span class="glyphicon glyphicon-triangle-bottom small"
@@ -74,10 +83,26 @@
         <div id="eureka-panel" style="height: 500px;overflow: scroll"></div>
         <!---Eureka Panel-->
     </div>
+    <div class="tab-pane" id="staticinstances">
+        <div class="col-sm-3">
+            <ul class="list-group" id="ussFiles">
+                <li class="list-group-item">First item</li>
+                <li class="list-group-item">Second item</li>
+                <li class="list-group-item">Third item</li>
+            </ul>
+        </div>
+        <div class="col-sm-6">
+            <div id="si-panel" style="height: 500px;overflow: scroll"></div>
+        </div>
+    </div>
 </div>
 <!--Nav Tab Sections-->
-<script type="text/javascript" src="../json-viewer/json-viewer.js"></script>
+<script type="text/javascript" src="util.js"></script>
 <script type="text/javascript" src="banner.js"></script>
 <script type="text/javascript" src="tab.js"></script>
+<script type="text/javascript" src="dropdown.js"></script>
+<script type="text/javascript" src="discovery.js"></script>
+<script type="text/javascript" src="../json-viewer/json-viewer.js"></script>
+<script type="text/javascript" src="staticinstances.js"></script>
 </body>
 </html>
