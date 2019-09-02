@@ -4,6 +4,8 @@
   
   .drop-container:hover .drop {
     display: block;
+    z-index: 1;
+
   }
   .drop-container .drop {
     display: none;
