@@ -19,7 +19,7 @@
 <!--Nav Tab Headers-->
 <ul class="nav nav-tabs" id="actionTabs">
     <li class="nav-item">
-        <a class="nav-link active" href="#jes">JES</a>
+        <a class="nav-link" href="#jes">JES</a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="#rundashboard">Run Dashboard</a>
@@ -28,13 +28,13 @@
         <a class="nav-link" href="#discovery">APIML Discovery</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="#staticinstances">APIML Static Instances</a>
+        <a class="nav-link active" href="#staticinstances">APIML Static Instances</a>
     </li>
 </ul>
 <!--Nav Tab Headers-->
 <!--Nav Tab Sections-->
 <div class="tab-content" id="actionTabsContent">
-    <div class="tab-pane show active" id="jes">
+    <div class="tab-pane" id="jes">
         <!---Filter-->
         <ol class="breadcrumb" style="margin: 0;border-radius: 0!important">
             <li>APIML Jobs</li>
@@ -83,14 +83,23 @@
         <div id="eureka-panel" style="height: 500px;overflow: scroll"></div>
         <!---Eureka Panel-->
     </div>
-    <div class="tab-pane" id="staticinstances">
+    <div class="row">
+    <div class="tab-pane show active" id="staticinstances">
         <div class="col-sm-3">
+            <button type="button" class="accordion">/api-def</button>
+            <div>
             <ul class="list-group" id="ussFiles">
                 <li class="list-group-item">First item</li>
                 <li class="list-group-item">Second item</li>
                 <li class="list-group-item">Third item</li>
             </ul>
+            </div>
         </div>
+        <div class="col-sm-3">
+            <div> <panel></panel></div>
+
+        </div>
+    </div>
         <div class="col-sm-6">
             <div id="si-panel" style="height: 500px;overflow: scroll"></div>
         </div>
