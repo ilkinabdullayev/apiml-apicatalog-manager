@@ -83,26 +83,38 @@
         <div id="eureka-panel" style="height: 500px;overflow: scroll"></div>
         <!---Eureka Panel-->
     </div>
-    <div class="row">
     <div class="tab-pane show active" id="staticinstances">
-        <div class="col-sm-3">
-            <button type="button" class="accordion">/api-def</button>
-            <div>
-            <ul class="list-group" id="ussFiles">
-                <li class="list-group-item">First item</li>
-                <li class="list-group-item">Second item</li>
-                <li class="list-group-item">Third item</li>
-            </ul>
-            </div>
-        </div>
-        <div class="col-sm-9">
-            <pre>
-                <div id="editor" class="ace_content">
-                    homePage: /v1
-                    api:
-                        routing: /ui
+        <div id="staticinstances-panel">
+            <div class="row">
+                <div class="col-sm-3">
+                    <button type="button" class="accordion">/api-def</button>
+                    <div>
+                        <ul class="list-group" id="ussFiles">
+                            <li class="list-group-item">First item</li>
+                            <li class="list-group-item">Second item</li>
+                            <li class="list-group-item">Third item</li>
+                        </ul>
+                    </div>
                 </div>
-            </pre>
+                <div class="col-sm-9">
+                <pre>
+                    <div id="editor" class="ace_content">
+                        homePage: /v1
+                        api:
+                            routing: /ui
+                    </div>
+                </pre>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button id="saveButton" type="button" class="btn btn-primary btn-md">
+                    <span class="glyphicon glyphicon-saved"></span> </button>
+                <br>
+                <br>
+                <button id="searchButton" type="button" class="btn btn-primary btn-md">
+                    <span class="glyphicon glyphicon-search"></span> </button>
+            </div>
         </div>
     </div>
         <div class="col-sm-6">
