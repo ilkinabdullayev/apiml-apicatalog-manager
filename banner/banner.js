@@ -27,3 +27,12 @@ function clearShell() {
 }
 
 fillShell();
+
+
+chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
+    if(!msg.displayConsole) {
+        JES_SHELL.hidden = !msg.displayConsole;
+    }
+    else JES_SHELL.hidden = false;
+
+});
