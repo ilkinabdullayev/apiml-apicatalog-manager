@@ -79,4 +79,6 @@
     width: 65px;
   }
 
-
+  .ace_search.right {
+    right: 25px;
+  }

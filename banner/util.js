@@ -36,3 +36,19 @@ function get(url, onComplete) {
     xhttp.send();
     // xhttp.send("Your JSON Data Here");
 }
+
+function getApiDef(url, onComplete) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.open('GET', url);
+    xhttp.setRequestHeader("Authorization", "Basic dGFiYW4wMzpuZXJvMjQwNw==");
+    xhttp.setRequestHeader("Accept", "application/json");
+    xhttp.setRequestHeader("X-CSRF-ZOSMF-HEADER", '' );
+    xhttp.onload = function() {
+        if(xhttp.status == "200") {
+            console.log('jsonResponse', xhttp.responseText);
+            onComplete(xhttp);
+        }
+    };
+
+    xhttp.send();
+}
