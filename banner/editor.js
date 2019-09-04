@@ -21,6 +21,35 @@ function configureEditor() {
 
 }
 
+function getApiDefContent() {
+    // get('https://usilca32.lvn.broadcom.net:1443/zosmf/restfiles/fs?path=/z/masserv/mfaas/runtime/testb/zosmf.yml'
+    getApiDef('https://usilca32.lvn.broadcom.net:1443/zosmf/restfiles/fs?path=/z/masserv/taban03/dev/instance/api-defs',
+        (response) => {
+            const jsonResponse = JSON.parse(response.responseText);
+            const data = jsonResponse.items;
+
+            addItemsToLeftSidePanel(data);
+    });
+}
+
+function addItemsToLeftSidePanel(data) {
+    let li = '';
+    let count = 0;
+    data.forEach((item) => {
+        if (item.name.includes("yml") || item.name.includes(".properties")) {
+            li += '<li class="list-group-item" ><a id="fileItem' + count + '" class="nav-link" href="#item">' + item.name + '</li>'
+            count+=1;
+        }
+    });
+
+    let ul = document.getElementById("ussFiles");
+    ul.innerHTML = li;
+
+}
+
+getApiDefContent();
+configureEditor();
+
 searchButton.onclick = function() {
 
     var editor = ace.edit("editor");
@@ -39,5 +68,3 @@ fileItem.onclick = function(event) {
     ace.edit("editor").setValue("");
     event.preventDefault();
 }
-
-configureEditor();
