@@ -41,8 +41,7 @@
   }
 
   #editor {
-    position: absolute;
-    /*height: 100%;*/
+    display: block;
     top: 0;
     right: 0;
     bottom: 0;
@@ -65,9 +64,19 @@
     width: 70px;
   }
 
+  #refreshButton {
+    border-radius: 50%;
+    text-align: center;
+    text-decoration: none;
+    height: 70px;
+    width: 70px;
+  }
+
   .action-buttons {
     position: absolute;
     top: 115px;
     right: 50px;
     width: 65px;
   }
+
+

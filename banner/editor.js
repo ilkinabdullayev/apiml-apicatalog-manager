@@ -1,6 +1,7 @@
 let searchButton = document.getElementById("searchButton");
 let searchBarHidden = true;
-let searchLabel = document.getElementsByClassName("ace_search right");
+let fileItem = document.getElementById("item");
+
 function configureEditor() {
     var editor = ace.edit("editor");
     editor.setTheme("ace/theme/tomorrow_night_eighties");
@@ -12,8 +13,8 @@ function configureEditor() {
     editor.setOptions({
         autoScrollEditorIntoView: true,
         copyWithEmptySelection: true,
-        maxLines: 200,
-        minLines: 100,
+        maxLines: Infinity,
+        minLines: 52,
         showPrintMargin: false
         // wrap: true,
     });
@@ -32,6 +33,11 @@ searchButton.onclick = function() {
         // editor.searchBox.hide();
         searchBarHidden = true;
     }
+}
+
+fileItem.onclick = function(event) {
+    ace.edit("editor").setValue("");
+    event.preventDefault();
 }
 
 configureEditor();
