@@ -60,7 +60,6 @@ searchButton.onclick = function() {
     }
 }
 
-
 function changeFile(ul) {
     ul.onclick = function(event) {
         fileName = event.target.innerText;
@@ -68,7 +67,6 @@ function changeFile(ul) {
         event.preventDefault();
     };
 }
-
 
 function getFileContent(clickedElement) {
      getApiDefContentFile('https://usilca32.lvn.broadcom.net:1443/zosmf/restfiles/fs/z/masserv/taban03/dev/instance/api-defs/' + clickedElement,
@@ -87,7 +85,7 @@ saveButton.onclick = function() {
     console.log(fileName)
     request('PUT','https://usilca32.lvn.broadcom.net:1443/zosmf/restfiles/fs/z/masserv/taban03/dev/instance/api-defs/' + fileName,
         () => alert("File uploaded correctly!"),
-        () => alert("Something went wrong with uploading file!"),
+        () => alert("Something went wrong while uploading the file!"),
         )
 }
 
