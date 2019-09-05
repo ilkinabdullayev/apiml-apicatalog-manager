@@ -40,42 +40,44 @@
 <!--Nav Tab Sections-->
 <div class="tab-content" id="actionTabsContent">
     <div class="tab-pane show active" id="jes">
-        <input type="hidden" id="stdoutId"/>
-        <!---Filter-->
-        <ol class="breadcrumb" style="margin: 0;border-radius: 0!important">
-            <li>APIML Jobs</li>
+        <div id="jes-panel">
+            <input type="hidden" id="stdoutId"/>
+            <!---Filter-->
+            <ol class="breadcrumb" style="margin: 0;border-radius: 0!important">
+                <li>APIML Jobs</li>
 
-            <li class="relative drop-container">
-                <select id="jobNamesDropdown">
-                    <!-- <option value="">A</option>-->
-                </select>
-            </li>
+                <li class="relative drop-container">
+                    <select id="jobNamesDropdown">
+                        <!-- <option value="">A</option>-->
+                    </select>
+                </li>
 
-            <li class="relative drop-container">
-                <select id="jobIdsDropdown">
-                    <!-- <option value="">A</option>-->
-                </select>
-            </li>
+                <li class="relative drop-container">
+                    <select id="jobIdsDropdown">
+                        <!-- <option value="">A</option>-->
+                    </select>
+                </li>
 
-            <button id="startStopButton" data-status="stopped" type="button" class="btn btn-primary btn-sm" style="margin-left: 20px">
-                <i class="glyphicon glyphicon-play"></i>
-                &nbsp;
-                Start
-            </button>
-        </ol>
-        <!---Filter-->
-        <!---Banner-->
-        <div class="shell-wrap">
-            <ul id="jesShell" class="shell-body">
-                <li>Please wait. It's fetching from service...</li>
-            </ul>
+                <button id="startStopButton" data-status="stopped" type="button" class="btn btn-primary btn-sm" style="margin-left: 20px">
+                    <i class="glyphicon glyphicon-play"></i>
+                    &nbsp;
+                    Start
+                </button>
+            </ol>
+            <!---Filter-->
+            <!---Banner-->
+            <div class="shell-wrap">
+                <ul id="jesShell" class="shell-body">
+                    <li>Please wait. It's fetching from service...</li>
+                </ul>
+            </div>
+            <!---Banner-->
+            <!--Loading-->
+            <div class="loading">
+                <img src="../images/loading.gif" />
+            </div>
+            <!--Loading-->
         </div>
-        <!---Banner-->
-        <!--Loading-->
-        <div class="loading">
-            <img src="../images/loading.gif" />
-        </div>
-        <!--Loading-->
     </div>
     <div class="tab-pane" id="rundashboard">
       sdsdsd
@@ -85,7 +87,7 @@
         <div id="eureka-panel" style="height: 500px;overflow: scroll"></div>
         <!---Eureka Panel-->
     </div>
-    <div class="tab-pane show active" id="staticinstances">
+    <div class="tab-pane" id="staticinstances">
         <div id="staticinstances-panel">
             <div class="row">
                 <div class="col-sm-3">

@@ -11,5 +11,3 @@ function initializeEurekaStaticInstances() {
             jsonViewer.showJSON(jsonResponse);
         });
 }
-
-initializeEurekaStaticInstances();
