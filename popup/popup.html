@@ -1,20 +1,19 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <style>
-      button {
-        height: 30px;
-        width: 30px;
-        outline: none;
-      }
-    </style>
+      <link rel="stylesheet" href="../statics/normalize.min.css"/>
+      <link rel="stylesheet" href="../statics/bootstrap.min.css"/>
   </head>
   <body>
-   <div style="width:300px;height:120px;/*border: 1px solid red*/">
-        <h3 style="text-align: center">API Catalog management plugin v1.5.0</h2>
-        <button id="openApiCatalogButton" style="width: 100%">Open API Catalog</button>
-        <button id="openJESShellButton" style="width: 100%">Open JES2 Shell</button>
-   </div>
+  <div class="panel panel-default" style="min-width: 300px;margin: 0px!important">
+      <div class="panel-heading" style="font-weight: bold">API Catalog management plugin v1.5.0</div>
+      <div class="panel-body">
+          <div id="navigateButtons"></div>
+      </div>
+      <div class="panel-footer" id="popupActionFooter">
+          <label class="checkbox-inline"><input type="checkbox" value="">Hide Panel</label>
+      </div>
+  </div>
    <script src="popup.js"></script>
   </body>
 </html>

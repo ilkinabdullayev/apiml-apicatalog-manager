@@ -9,7 +9,7 @@
   .shell-body {
     margin: 0;
     padding: 5px;
-    height: 500px;
+    height: 100vh;
     overflow: scroll;
     list-style: none;
     background: #141414;
