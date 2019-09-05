@@ -1,0 +1,41 @@
+.panel {
+    padding: 0 18px;
+    background-color: white;
+    display: none;
+    overflow: hidden;
+}
+
+#editor {
+    display: block;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+#saveButton {
+    border-radius: 50%;
+    text-align: center;
+    text-decoration: none;
+    height: 70px;
+    width: 70px;
+}
+
+#searchButton {
+    border-radius: 50%;
+    text-align: center;
+    text-decoration: none;
+    height: 70px;
+    width: 70px;
+}
+
+.action-buttons {
+    position: absolute;
+    top: 115px;
+    right: 50px;
+    width: 65px;
+}
+
+.ace_search.right {
+    right: 25px;
+}
