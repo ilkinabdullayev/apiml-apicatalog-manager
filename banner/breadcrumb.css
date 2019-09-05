@@ -64,14 +64,6 @@
     width: 70px;
   }
 
-  #refreshButton {
-    border-radius: 50%;
-    text-align: center;
-    text-decoration: none;
-    height: 70px;
-    width: 70px;
-  }
-
   .action-buttons {
     position: absolute;
     top: 115px;
