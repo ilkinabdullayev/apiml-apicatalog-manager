@@ -4,6 +4,7 @@
     <link rel="stylesheet" href="../statics/normalize.min.css"/>
     <link rel="stylesheet" href="../statics/bootstrap.min.css"/>
     <link rel="stylesheet" href="../statics/tachyons.css"/>
+    <link rel="stylesheet" href="general.css"/>
     <link rel="stylesheet" href="shell.css"/>
     <link rel="stylesheet" href="breadcrumb.css"/>
     <link rel="stylesheet" href="../json-viewer/json-viewer.css"/>
@@ -14,12 +15,16 @@
         background-color: #fff;
         border-color: #dee2e6 #dee2e6 #fff
     }
+
+    #jes-panel{
+        position: relative;
+    }
 </style>
 <body style="margin: 0px;overflow: hidden;">
 <!--Nav Tab Headers-->
 <ul class="nav nav-tabs" id="actionTabs">
     <li class="nav-item">
-        <a class="nav-link" href="#jes">JES</a>
+        <a class="nav-link active" href="#jes">JES</a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="#rundashboard">Run Dashboard</a>
@@ -28,43 +33,35 @@
         <a class="nav-link" href="#discovery">APIML Discovery</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link active" href="#staticinstances">APIML Static Instances</a>
+        <a class="nav-link" href="#staticinstances">APIML Static Instances</a>
     </li>
 </ul>
 <!--Nav Tab Headers-->
 <!--Nav Tab Sections-->
 <div class="tab-content" id="actionTabsContent">
-    <div class="tab-pane" id="jes">
+    <div class="tab-pane show active" id="jes">
+        <input type="hidden" id="stdoutId"/>
         <!---Filter-->
         <ol class="breadcrumb" style="margin: 0;border-radius: 0!important">
             <li>APIML Jobs</li>
+
             <li class="relative drop-container">
-                <span href="#">Job Names<span class="glyphicon glyphicon-triangle-bottom small"
-                                          aria-hidden="true"></span></span>
-                <div class="drop bg-white">
-                    <ul id="jobNamesDropdown" class="list pl0"></ul>
-                </div>
+                <select id="jobNamesDropdown">
+                    <!-- <option value="">A</option>-->
+                </select>
             </li>
 
             <li class="relative drop-container">
-                <span href="#">Job Ids<span class="glyphicon glyphicon-triangle-bottom small"
-                                          aria-hidden="true"></span></span>
-                <div class="drop bg-white">
-                    <ul id="jobIdsDropdown" class="list pl0"></ul>
-                </div>
+                <select id="jobIdsDropdown">
+                    <!-- <option value="">A</option>-->
+                </select>
             </li>
 
-            <li><a href="#">STC24651</a></li>
-            <li class="active relative drop-container">
-                <span href="#">STC24651 <span class="glyphicon glyphicon-triangle-bottom small"
-                                              aria-hidden="true"></span></span>
-                <div class="drop bg-white">
-                    <ul class="list pl0">
-                        <li><a href="#">STC246512</a></li>
-                        <li><a href="#">STC246514</a></li>
-                    </ul>
-                </div>
-            </li>
+            <button id="startStopButton" data-status="stopped" type="button" class="btn btn-primary btn-sm" style="margin-left: 20px">
+                <i class="glyphicon glyphicon-play"></i>
+                &nbsp;
+                Start
+            </button>
         </ol>
         <!---Filter-->
         <!---Banner-->
@@ -74,6 +71,11 @@
             </ul>
         </div>
         <!---Banner-->
+        <!--Loading-->
+        <div class="loading">
+            <img src="../images/loading.gif" />
+        </div>
+        <!--Loading-->
     </div>
     <div class="tab-pane" id="rundashboard">
       sdsdsd
@@ -118,13 +120,10 @@
             </div>
         </div>
     </div>
-        <div class="col-sm-6">
-            <div id="si-panel" style="height: 500px;overflow: scroll"></div>
-        </div>
-    </div>
 </div>
 <!--Nav Tab Sections-->
 <script type="text/javascript" src="util.js"></script>
+<script type="text/javascript" src="jes.js"></script>
 <script src="../statics/ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript" src="banner.js"></script>
 <script type="text/javascript" src="tab.js"></script>
