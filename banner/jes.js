@@ -16,7 +16,7 @@ function fillShell(jobName, jobId) {
 
             clearShell();
             lines.forEach(item => {
-                addItemToJES(item);
+               // addItemToJES(item);
             });
 
             hideLoading()

@@ -11,31 +11,19 @@ addHostnameButton.onclick = function(element) {
         return;
     }
 
-    chrome.storage.sync.get("hostnames", function(result){
-        // Shows variable
-        let hostnames = result.hostnames || [];
-        hostnames.push({
-            hostname: hostname,
-            hostUrl: hostUrl
-        });
-
-        chrome.storage.sync.set({
-            "hostnames" : hostnames
-        });
-
-        hostnameInputText.value = '';
-        hostUrlInputText.value = '';
-        initTable(hostnames);
+    let hostnames = localStorage.getObj("hostnames") || [];
+    hostnames.push({
+        hostname: hostname,
+        hostUrl: hostUrl
     });
 
+    localStorage.setObj("hostnames", hostnames);
 
+    hostnameInputText.value = '';
+    hostUrlInputText.value = '';
+    initTable(hostnames);
 }
 
-chrome.storage.sync.get("hostnames", function(result){
-    // Shows variable
-    let hostnames = result.hostnames || [];
-    initTable(hostnames);
-});
 
 function initTable(hostnames) {
     const hostnameTable = document.getElementById('hostnameTable')
@@ -45,6 +33,7 @@ function initTable(hostnames) {
     if (hostnames.length == 0) {
         hostnameTableContent = "There's no hostname configured";
     } else {
+        console.log(hostnames)
         hostnames.forEach(item => {
             hostnameTableContent += '<tr><td>' + item.hostname + '</td><td>' + item.hostUrl + '</td></tr>'
         });
@@ -52,3 +41,10 @@ function initTable(hostnames) {
 
     hostnameTableBody.innerHTML = hostnameTableContent;
 }
+
+function init() {
+    let hostnames = localStorage.getObj("hostnames") || [];
+    initTable(hostnames);
+}
+
+init();
