@@ -1,44 +1,63 @@
 'use strict';
 
+const URL_REGEX = /^https?:\/\/(?:[^./?#]+\.)?lvn.broadcom\.net/;
+const EXCLUDED_SERVICES_MATHES = ["zosmf", "static"]
+
+
 function executeContentScript() {
     chrome.tabs.executeScript({
         file: 'contentScript.js'
     })
 }
 
-function getActiveHost(url) {
-    let foundedItem = null;
-    let hosts = JSON.parse(localStorage.getItem("hosts")) || [];
-    for (let i = 0; i < hosts.length; i++) {
-        if (url.includes(hosts[i].gatewayUrl)) {
-            foundedItem = hosts[i];
+function checkHostnames(url) {
+    let isPassed = false;
+    // Shows variable
+    let hostnames = localStorage.getObj("hostnames") || [];
+    for (var i = 0; i < hostnames.length; i++) {
+        if (url.includes(hostnames[i].hostUrl)) {
+            isPassed = true;
         }
     }
 
-    return foundedItem;
-}
-
-function saveActiveHost(host) {
-    localStorage.setItem('activeHost', JSON.stringify(host));
+    return isPassed;
 }
 
 function init() {
     chrome.webNavigation.onCompleted.addListener(function (detail) {
         console.log(detail)
         const url = detail.url;
-        const activeHost = getActiveHost(url);
-        if (activeHost == null
+        if (!checkHostnames(url)
             || !url.includes('apicatalog')
             || url.includes('/login')) {
             return;
         }
 
-        saveActiveHost(activeHost);
+        // if(isExcludeService(url)) {
+        //   return;
+        // }
 
-      //  alert(url);
+        alert(url);
         executeContentScript();
     }, {url: [{urlMatches: 'http://*'}, {urlMatches: 'https://*'}]});
 }
 
+function isExcludeService(url) {
+    let found = false;
+    EXCLUDED_SERVICES_MATHES.forEach(item => {
+        if (url.includes(item)) {
+            found = true;
+        }
+    });
+
+    return found;
+}
 
 init();
+
+Storage.prototype.setObj = function(key, obj) {
+    return this.setItem(key, JSON.stringify(obj))
+}
+Storage.prototype.getObj = function(key) {
+    return JSON.parse(this.getItem(key))
+}

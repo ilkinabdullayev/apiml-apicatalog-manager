@@ -36,26 +36,15 @@ function init() {
     const root = document.getElementById('root');
     root.appendChild(content);
 
-    //alert('jello'+serviceId);
+    alert('jello'+serviceId);
 
 
     document.getElementById('fullScreenButton').onclick = function(element) {
-        let iFrame  = document.getElementById("actionFrame");
-        const status = this.getAttribute('data-status');
-        if (status == 'not-fulled') {
-            content.style.top = "0px";
-            iFrame.style.height = "100vh";
-            this.setAttribute('data-status', 'full-fulled');
-            this.innerHTML = '<i class="glyphicon glyphicon-resize-small"></i>';
-        } else {
-            this.setAttribute('data-status', 'not-fulled');
-            this.innerHTML = '<i class="glyphicon glyphicon-resize-full"></i>';
-            content.style.top = null;
-            iFrame.style.height = "540px";
-        }
+        const status = '';
+       // if (status == '')
       //  alert('')
 
-
+        content.style.top = "0px";
     }
 }
 

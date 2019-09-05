@@ -37,6 +37,13 @@ function get(url, onComplete) {
     // xhttp.send("Your JSON Data Here");
 }
 
+
+Storage.prototype.setObj = function(key, obj) {
+    return this.setItem(key, JSON.stringify(obj))
+}
+Storage.prototype.getObj = function(key) {
+    return JSON.parse(this.getItem(key))
+}
 function getApiDef(url, onComplete) {
     var xhttp = new XMLHttpRequest();
     xhttp.open('GET', url);
