@@ -52,3 +52,19 @@ function getApiDef(url, onComplete) {
 
     xhttp.send();
 }
+
+function getApiDefContentFile(url, onComplete) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.open('GET', url);
+    xhttp.setRequestHeader("Authorization", "Basic dGFiYW4wMzpuZXJvMjQwNw==");
+    xhttp.setRequestHeader("X-CSRF-ZOSMF-HEADER", '' );
+    xhttp.setRequestHeader("X-IBM-Data-Type", 'binary' );
+    xhttp.onload = function() {
+        if(xhttp.status == "200") {
+            console.log('jsonResponse', xhttp.responseText);
+            onComplete(xhttp);
+        }
+    };
+
+    xhttp.send();
+}
