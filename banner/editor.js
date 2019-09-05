@@ -22,7 +22,7 @@ function configureEditor() {
 
 function getApiDefContentFileName() {
     // get('https://usilca32.lvn.broadcom.net:1443/zosmf/restfiles/fs?path=/z/masserv/mfaas/runtime/testb/zosmf.yml'
-    getApiDef('https://usilca32.lvn.broadcom.net:1443/zosmf/restfiles/fs?path=/z/masserv/taban03/dev/instance/api-defs',
+    getApiDef('https://ca32.ca.com:1443/zosmf/restfiles/fs?path=/z/masserv/taban03/dev/instance/api-defs',
         (response) => {
             const jsonResponse = JSON.parse(response.responseText);
             const data = jsonResponse.items;
@@ -75,7 +75,7 @@ function changeFile(ul) {
 
 
 function getFileContent(clickedElement) {
-     getApiDefContentFile('https://usilca32.lvn.broadcom.net:1443/zosmf/restfiles/fs/z/masserv/taban03/dev/instance/api-defs/' + clickedElement,
+     getApiDefContentFile('https://ca32.ca.com:1443/zosmf/restfiles/fs/z/masserv/taban03/dev/instance/api-defs/' + clickedElement,
         (response) => {
          console.log(response.responseText)
          fillTextAreaWithFile(response.responseText.toString());
