@@ -36,7 +36,7 @@ function init() {
     const root = document.getElementById('root');
     root.appendChild(content);
 
-    alert('jello'+serviceId);
+    //alert('jello'+serviceId);
 
 
     document.getElementById('fullScreenButton').onclick = function(element) {
