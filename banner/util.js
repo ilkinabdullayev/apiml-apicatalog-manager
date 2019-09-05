@@ -119,7 +119,7 @@ Storage.prototype.getObj = function(key) {
     return JSON.parse(this.getItem(key))
 }
 function getApiDef(url, onComplete) {
-    var xhttp = new XMLHttpRequest();
+    let xhttp = new XMLHttpRequest();
     xhttp.open('GET', url);
     xhttp.setRequestHeader("Authorization", "Basic dGFiYW4wMzpuZXJvMjQwNw==");
     xhttp.setRequestHeader("Accept", "application/json");
@@ -135,7 +135,7 @@ function getApiDef(url, onComplete) {
 }
 
 function getApiDefContentFile(url, onComplete) {
-    var xhttp = new XMLHttpRequest();
+    let xhttp = new XMLHttpRequest();
     xhttp.open('GET', url);
     xhttp.setRequestHeader("Authorization", "Basic dGFiYW4wMzpuZXJvMjQwNw==");
     xhttp.setRequestHeader("X-CSRF-ZOSMF-HEADER", '' );
