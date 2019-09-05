@@ -4,7 +4,8 @@ const JOB_IDS_DROPDOWN = document.getElementById("jobIdsDropdown");
 let distinctedJobs = [];
 
 function fillJobDropdowns() {
-    get('https://ca32.ca.com:1443/zosmf/restjobs/jobs?owner=*&prefix=MAS2*',
+    callZOSMF('/restjobs/jobs?owner=*&prefix=MAS2*',
+        'GET',
         (response) => {
             const data = JSON.parse(response.responseText);
             for (const index in data) {
@@ -107,7 +108,8 @@ function onChangeJobIdsDropdown() {
     toggleButtonStatus(this.options[this.selectedIndex]);
 
     showLoading();
-    get('https://ca32.ca.com:1443/zosmf/restjobs/jobs/' + jobName + '/' + jobId + '/files',
+    callZOSMF('/restjobs/jobs/' + jobName + '/' + jobId + '/files',
+        'GET',
         (response) => {
             const data = JSON.parse(response.responseText);
 

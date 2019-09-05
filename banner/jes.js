@@ -9,14 +9,15 @@ function fillShell(jobName, jobId) {
     addItemToJES('Please wait. It\'s fetching from service...');
 
     const stdoutId = validateStdoutId();
-    get('https://ca32.ca.com:1443/zosmf/restjobs/jobs/' + jobName + '/' + jobId + '/files/' + stdoutId + '/records',
+    callZOSMF('/restjobs/jobs/' + jobName + '/' + jobId + '/files/' + stdoutId + '/records',
+        'GET',
         response => {
             const data = response.responseText;
             const lines = data.split("\n");
 
             clearShell();
             lines.forEach(item => {
-               // addItemToJES(item);
+                addItemToJES(item);
             });
 
             hideLoading()

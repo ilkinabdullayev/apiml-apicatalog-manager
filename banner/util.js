@@ -21,6 +21,13 @@ function findJsonItem(array, key) {
     return foundedItem;
 }
 
+function callZOSMF(path, method, onComplete, onFail) {
+    const zosmfUrl = localStorage.getObj('activeHost').zosmfUrl;
+    if (method == 'GET') {
+        get(zosmfUrl + '/zosmf' + path, onComplete, onFail);
+    }
+}
+
 function get(url, onComplete, onFail) {
     request('GET', url, onComplete, onFail);
 }
@@ -111,13 +118,6 @@ function request(method, url, onComplete, onFail) {
     // xhttp.send("Your JSON Data Here");
 }
 
-
-Storage.prototype.setObj = function(key, obj) {
-    return this.setItem(key, JSON.stringify(obj))
-}
-Storage.prototype.getObj = function(key) {
-    return JSON.parse(this.getItem(key))
-}
 function getApiDef(url, onComplete) {
     let xhttp = new XMLHttpRequest();
     xhttp.open('GET', url);
@@ -149,4 +149,12 @@ function getApiDefContentFile(url, onComplete) {
 
     xhttp.send();
 }
+
+Storage.prototype.setObj = function(key, obj) {
+    return this.setItem(key, JSON.stringify(obj))
+}
+Storage.prototype.getObj = function(key) {
+    return JSON.parse(this.getItem(key))
+}
+
 
