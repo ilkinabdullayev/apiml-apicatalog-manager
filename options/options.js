@@ -1,50 +1,55 @@
-let addHostnameButton = document.getElementById('addHostnameButton');
+let addHostButton = document.getElementById('addHostButton');
 
-addHostnameButton.onclick = function(element) {
+addHostButton.onclick = function() {
     const hostnameInputText = document.getElementById('hostnameInputText');
-    const hostUrlInputText = document.getElementById('hostUrlInputText');
+    const gatewayUrlInputText = document.getElementById('gatewayUrlInputText');
+    const zosmfUrlInputText = document.getElementById('zosmfUrlInputText');
 
     const hostname = hostnameInputText.value;
-    const hostUrl = hostUrlInputText.value;
+    const gatewayUrl = gatewayUrlInputText.value;
+    const zosmfUrl = zosmfUrlInputText.value;
 
-    if (hostname.trim() == '' || hostUrl.trim() == '') {
+    if (hostname.trim() == ''
+        || gatewayUrl.trim() == ''
+        || zosmfUrl.trim() == '') {
         return;
     }
 
-    let hostnames = localStorage.getObj("hostnames") || [];
-    hostnames.push({
+    let hosts = localStorage.getObj("hosts") || [];
+    hosts.push({
         hostname: hostname,
-        hostUrl: hostUrl
+        gatewayUrl: gatewayUrl,
+        zosmfUrl: zosmfUrl
     });
 
-    localStorage.setObj("hostnames", hostnames);
+    localStorage.setObj("hosts", hosts);
 
     hostnameInputText.value = '';
-    hostUrlInputText.value = '';
-    initTable(hostnames);
+    gatewayUrlInputText.value = '';
+    zosmfUrlInputText.value = '';
+    initTable(hosts);
 }
 
 
-function initTable(hostnames) {
-    const hostnameTable = document.getElementById('hostnameTable')
-    const hostnameTableBody = hostnameTable.getElementsByTagName('tbody')[0];
+function initTable(hosts) {
+    const hostTable = document.getElementById('hostTable')
+    const hostTableBody = hostTable.getElementsByTagName('tbody')[0];
 
-    let hostnameTableContent = '';
-    if (hostnames.length == 0) {
-        hostnameTableContent = "There's no hostname configured";
+    let hostTableContent = '';
+    if (hosts.length == 0) {
+        hostTableContent = "<tr><td colspan=\"3\">There's no hostname configured</td></tr>";
     } else {
-        console.log(hostnames)
-        hostnames.forEach(item => {
-            hostnameTableContent += '<tr><td>' + item.hostname + '</td><td>' + item.hostUrl + '</td></tr>'
+        hosts.forEach(item => {
+            hostTableContent += '<tr><td>' + item.hostname + '</td><td>' + item.gatewayUrl + '</td><td>' + item.zosmfUrl + '</td></tr>'
         });
     }
 
-    hostnameTableBody.innerHTML = hostnameTableContent;
+    hostTableBody.innerHTML = hostTableContent;
 }
 
 function init() {
-    let hostnames = localStorage.getObj("hostnames") || [];
-    initTable(hostnames);
+    let hosts = localStorage.getObj("hosts") || [];
+    initTable(hosts);
 }
 
 init();
