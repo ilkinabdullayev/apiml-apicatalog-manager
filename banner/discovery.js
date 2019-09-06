@@ -1,5 +1,6 @@
 //Eureka
 let select = document.getElementById('discoveryDropdown');
+let refreshButton = document.getElementById('refreshDiscovery');
 
 function initializeEureka() {
     let serviceId = getParamValue('serviceId');
@@ -50,4 +51,10 @@ function changeEureka(serviceId) {
             jsonViewer.showJSON(jsonResponse);
             console.log(jsonResponse)
         });
+}
+
+refreshButton.onclick = function () {
+    request("POST", 'https://localhost:10011/discovery/api/v1/staticApi',
+        () => {alert("Static API definitions have been refreshed!")},
+        () => {alert("Something went wrong while trying to refresh Static API definitions")});
 }
