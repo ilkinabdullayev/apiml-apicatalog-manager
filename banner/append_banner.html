@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="shell.css"/>
     <link rel="stylesheet" href="breadcrumb.css"/>
     <link rel="stylesheet" href="editor.css"/>
+    <link rel="stylesheet" href="discovery.css"/>
     <link rel="stylesheet" href="../json-viewer/json-viewer.css"/>
 </head>
 <style>
@@ -85,8 +86,20 @@
     </div>
     <div class="tab-pane" id="discovery">
         <!--Eureka Panel-->
-        <div id="eureka-panel" style="height: 500px;overflow: scroll"></div>
+        <div id="eureka-panel">
+            <div class="row">
+                <div class="col-sm-9">
+                    <select id="discoveryDropdown">
+                        <option value="">All</option>
+                    </select>
+                </div>
+                <div class="col-sm-3">
+                    <button type="button" class="btn btn-primary btn-md">Refresh Discovery Service</button>
+                </div>
+            </div>
+            <div id="eurekaInstancesViewer" style="height: 500px;overflow: scroll"></div>
         <!---Eureka Panel-->
+        </div>
     </div>
     <div class="tab-pane" id="staticinstances">
         <div id="staticinstances-panel">
