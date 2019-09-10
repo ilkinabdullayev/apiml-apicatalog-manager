@@ -65,7 +65,7 @@ function initTable(hosts) {
 
     let hostTableContent = '';
     if (hosts.length == 0) {
-        hostTableContent = "<tr><td colspan=\"7\">There's no hostname configured</td></tr>";
+        hostTableContent = "<tr><td colspan=\"6\">There's no hostname configured</td></tr>";
     } else {
         hosts.forEach(item => {
             hostTableContent += '<tr><td>' + item.hostname + '</td><td>' + item.gatewayUrl + '</td><td>' + item.discoveryUrl + '</td><td>' + item.zosmfUrl + '</td><td>' + item.jobNamePrefix + '</td><td>' + item.staticFilesDirectory + '</td></tr>'

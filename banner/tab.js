@@ -11,6 +11,7 @@ ul.onclick = function(event) {
 
     let existedClassesA = targetNav.getAttribute("class");
     if(existedClassesA.includes('active')) {
+        event.preventDefault();
         return;
     }
 
