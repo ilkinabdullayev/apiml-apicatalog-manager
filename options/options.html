@@ -12,11 +12,12 @@
 </head>
 <body>
 <div class="container">
-    <table id="hostTable" class="table table-bordered table-striped table-condensed">
+    <table id="hostTable" class="table table-bordered table-striped table-condensed" style="overflow-x:auto;">
         <thead>
         <tr>
             <th>Hostname</th>
             <th>Gateway URL</th>
+            <th>Discovery URL</th>
             <th>ZOSMF URL</th>
             <th>Job names prefix</th>
             <th>Static files location</th>
@@ -24,7 +25,7 @@
         </thead>
         <tbody>
         <tr>
-            <td colspan="5">Loading hostnames...</td>
+            <td colspan="7">Loading hostnames...</td>
         </tr>
         </tbody>
     </table>
@@ -37,9 +38,22 @@
             <input type="text" class="form-control" placeholder="Gateway URL" id="gatewayUrlInputText">
         </div>
         <div class="col-sm-4" style="margin-bottom: 7px">
-            <input type="text" class="form-control" placeholder="ZOSMF URL" id="zosmfUrlInputText">
+            <input type="text" class="form-control" placeholder="Discovery URL" id="discoveryUrlInputText">
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-sm-4" style="margin-bottom: 7px">
+            <input type="text" class="form-control" placeholder="ZOSMF URL" id="zosmfUrlInputText">
+        </div>
+        <div class="col-sm-4" style="margin-bottom: 7px">
+            <input type="text" class="form-control" placeholder="username" id="zosmfUsernameInputText">
+        </div>
+        <div class="col-sm-4" style="margin-bottom: 7px">
+            <input type="password" class="form-control" placeholder="password" id="zosmfPasswordInputText">
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-sm-3" style="margin-bottom: 7px">
             <input type="text" class="form-control" placeholder="Jobname prefix(mas2*)" id="jobNamePrefixInputText">

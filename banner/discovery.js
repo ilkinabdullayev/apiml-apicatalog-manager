@@ -5,7 +5,9 @@ let refreshButton = document.getElementById('refreshDiscovery');
 function initializeEureka() {
     let serviceId = getParamValue('serviceId');
     serviceId = (serviceId == 'dashboard') ? '' : '/' + serviceId;
-    get('https://localhost:10011/eureka/apps' + serviceId,
+
+    const discoveryUrl = localStorage.getObj('activeHost').discoveryUrl;
+    get(discoveryUrl + '/eureka/apps' + serviceId,
         (response) => {
             const jsonResponse = JSON.parse(response.responseText);
 
@@ -42,7 +44,8 @@ select.onchange = function (event) {
 }
 
 function changeEureka(serviceId) {
-    get('https://localhost:10011/eureka/apps/' + serviceId,
+    const discoveryUrl = localStorage.getObj('activeHost').discoveryUrl;
+    get(discoveryUrl + '/eureka/apps/' + serviceId,
         (response) => {
             const jsonResponse = JSON.parse(response.responseText);
             const jsonViewer = new JSONViewer();
@@ -54,7 +57,9 @@ function changeEureka(serviceId) {
 }
 
 refreshButton.onclick = function () {
-    request("POST", 'https://localhost:10011/discovery/api/v1/staticApi',
+    const discoveryUrl = localStorage.getObj('activeHost').discoveryUrl;
+
+    request("POST", discoveryUrl + '/discovery/api/v1/staticApi',
         () => {alert("Static API definitions have been refreshed!")},
         () => {alert("Something went wrong while trying to refresh Static API definitions")});
 }

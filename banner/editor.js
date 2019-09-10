@@ -72,7 +72,8 @@ function changeFile(ul) {
 }
 
 function getFileContent(clickedElement) {
-     getApiDefContentFile('/restfiles/fs/z/masserv/taban03/dev/instance/api-defs/' + clickedElement,
+    const staticFilesDirectory = localStorage.getObj('activeHost').staticFilesDirectory;
+     getApiDefContentFile('/restfiles/fs' + staticFilesDirectory + '/' + clickedElement,
         (response) => {
          console.log(response.responseText)
          fillTextAreaWithFile(response.responseText.toString());
@@ -88,11 +89,12 @@ saveButton.onclick = function() {
     console.log(fileName);
     const tabId = localStorage.getObj('activeTab').tabId;
     const zosmfUrl = localStorage.getObj('activeHost').zosmfUrl;
+    const staticFilesDirectory = localStorage.getObj('activeHost').staticFilesDirectory;
 
     chrome.tabs.sendMessage(tabId, {
         action: "saveFile",
         zosmfUrl: zosmfUrl,
-        filePath: '/restfiles/fs/z/masserv/taban03/dev/instance/api-defs/' + fileName,
+        filePath: '/restfiles/fs' + staticFilesDirectory + '/' + fileName,
         body: ace.edit("editor").getValue()
 
     }, function (res) {
