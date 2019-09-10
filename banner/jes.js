@@ -8,7 +8,7 @@ function fillShell(jobName, jobId) {
     showLoading();
     addItemToJES('Please wait. It\'s fetching from service...');
 
-    const stdoutId = validateStdoutId();
+    const stdoutId = STDOUT_ID_HIDDEN_INPUT.value;
     callZOSMF('/restjobs/jobs/' + jobName + '/' + jobId + '/files/' + stdoutId + '/records',
         'GET',
         response => {
@@ -30,10 +30,7 @@ function fillShell(jobName, jobId) {
 
 START_STOP_BUTTON.onclick = function(element) {
     showLoading();
-
     toggleButton(this);
-
-    stopJob();
 }
 
 
@@ -44,24 +41,52 @@ function toggleButton(e) {
         e.innerHTML = '<i class="glyphicon glyphicon-stop"></i>\n' +
             '                    &nbsp;\n' +
             '                    Stop';
+
+        startJob();
     } else if (dataStatus == 'started') {
         e.setAttribute('data-status', 'stopped');
         e.innerHTML = '<i class="glyphicon glyphicon-play"></i>\n' +
             '                    &nbsp;\n' +
             '                    Start';
+
+        stopJob();
     }
 }
 
 function stopJob() {
     const jobName = document.getElementById("jobNamesDropdown").value;
     const jobId = document.getElementById("jobIdsDropdown").value;
-    del('https://ca32.ca.com:1443/zosmf/restjobs/jobs/' + jobName + '/' + jobId,
-        response => {
-            hideLoading();
-        }, error => {
-            hideLoading();
-            alert(error);
-        });
+    const tabId = localStorage.getObj('activeTab').tabId;
+    const zosmfUrl = localStorage.getObj('activeHost').zosmfUrl;
+    chrome.tabs.sendMessage(tabId, {
+        action: "stopJob",
+        zosmfUrl: zosmfUrl,
+        jobName: jobName,
+        jobId: jobId
+    }, function (res) {
+        if (res.status != 'OK') {
+            alert(res.message);
+        }
+
+        hideLoading();
+    });
+}
+
+function startJob() {
+    const tabId = localStorage.getObj('activeTab').tabId;
+    const zosmfUrl = localStorage.getObj('activeHost').zosmfUrl;
+    const jobName = document.getElementById("jobNamesDropdown").value;
+    chrome.tabs.sendMessage(tabId, {
+        action: "startJob",
+        zosmfUrl: zosmfUrl,
+        jobName: jobName
+    }, function (res) {
+        if (res.status != 'OK') {
+            alert(res.message);
+        }
+
+        hideLoading();
+    });
 }
 
 
@@ -83,12 +108,4 @@ function showLoading() {
 
 function hideLoading() {
     JES_SHELL_LOAD.style.display = 'none';
-}
-
-function validateStdoutId() {
-    if (STDOUT_ID_HIDDEN_INPUT.value == '') {
-        return 103;
-    }
-
-    return STDOUT_ID_HIDDEN_INPUT.value;
 }

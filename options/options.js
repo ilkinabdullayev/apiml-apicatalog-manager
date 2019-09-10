@@ -4,14 +4,21 @@ addHostButton.onclick = function() {
     const hostnameInputText = document.getElementById('hostnameInputText');
     const gatewayUrlInputText = document.getElementById('gatewayUrlInputText');
     const zosmfUrlInputText = document.getElementById('zosmfUrlInputText');
+    const jobNamePrefixInputText = document.getElementById('jobNamePrefixInputText');
+    const staticFilesDirectoryInputText = document.getElementById('staticFilesDirectoryInputText');
 
     const hostname = hostnameInputText.value;
     const gatewayUrl = gatewayUrlInputText.value;
     const zosmfUrl = zosmfUrlInputText.value;
+    const jobNamePrefix = jobNamePrefixInputText.value;
+    const staticFilesDirectory = staticFilesDirectoryInputText.value;
 
     if (hostname.trim() == ''
         || gatewayUrl.trim() == ''
-        || zosmfUrl.trim() == '') {
+        || zosmfUrl.trim() == ''
+        || jobNamePrefix.trim() == ''
+        || staticFilesDirectory.trim() == '') {
+        alert('Fill all blanks')
         return;
     }
 
@@ -19,7 +26,9 @@ addHostButton.onclick = function() {
     hosts.push({
         hostname: hostname,
         gatewayUrl: gatewayUrl,
-        zosmfUrl: zosmfUrl
+        zosmfUrl: zosmfUrl,
+        jobNamePrefix: jobNamePrefix,
+        staticFilesDirectory: staticFilesDirectory
     });
 
     localStorage.setObj("hosts", hosts);
@@ -27,6 +36,8 @@ addHostButton.onclick = function() {
     hostnameInputText.value = '';
     gatewayUrlInputText.value = '';
     zosmfUrlInputText.value = '';
+    jobNamePrefixInputText.value = '';
+    staticFilesDirectoryInputText.value = '';
     initTable(hosts);
 }
 
@@ -37,10 +48,10 @@ function initTable(hosts) {
 
     let hostTableContent = '';
     if (hosts.length == 0) {
-        hostTableContent = "<tr><td colspan=\"3\">There's no hostname configured</td></tr>";
+        hostTableContent = "<tr><td colspan=\"5\">There's no hostname configured</td></tr>";
     } else {
         hosts.forEach(item => {
-            hostTableContent += '<tr><td>' + item.hostname + '</td><td>' + item.gatewayUrl + '</td><td>' + item.zosmfUrl + '</td></tr>'
+            hostTableContent += '<tr><td>' + item.hostname + '</td><td>' + item.gatewayUrl + '</td><td>' + item.zosmfUrl + '</td><td>' + item.jobNamePrefix + '</td><td>' + item.staticFilesDirectory + '</td></tr>'
         });
     }
 

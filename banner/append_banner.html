@@ -43,7 +43,7 @@
             <input type="hidden" id="stdoutId"/>
             <!---Filter-->
             <ol class="breadcrumb" style="margin: 0;border-radius: 0!important">
-                <li>APIML Jobs</li>
+                <li>APIML Jobs: <b id="jobNamePrefixLabel">*</b></li>
 
                 <li class="relative drop-container">
                     <select id="jobNamesDropdown">
@@ -98,17 +98,19 @@
     <div class="tab-pane" id="staticinstances">
         <div id="staticinstances-panel">
             <div class="row">
-                <div class="col-sm-3">
-                    <button type="button" class="accordion">/api-def</button>
-                    <div>
-                        <ul class="list-group" id="ussFiles">
-                        </ul>
+                <div class="col-sm-3" style="padding-right: 0px">
+                    <div class="panel panel-default" style="display: block!important;padding: 0!important;">
+                        <div class="panel-heading" id="staticFilesDirectoryLabel">/directory</div>
+                        <div class="panel-body" style="padding: 0!important;">
+                            <ul class="list-group" id="ussFiles" style="margin: 0!important;">
+                            </ul>
+                        </div>
                     </div>
                 </div>
                 <div class="col-sm-9">
-                <pre>
-                    <div id="editor" class="ace_content"></div>
-                </pre>
+                    <pre>
+                        <div id="editor" class="ace_content"></div>
+                    </pre>
                 </div>
             </div>
 

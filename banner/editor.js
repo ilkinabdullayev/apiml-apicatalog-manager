@@ -19,7 +19,10 @@ function configureEditor() {
 }
 
 function getApiDefContentFileName() {
-    getApiDef('https://usilca32.lvn.broadcom.net:1443/zosmf/restfiles/fs?path=/z/masserv/taban03/dev/instance/api-defs',
+    const staticFilesDirectory = localStorage.getObj('activeHost').staticFilesDirectory;
+    document.getElementById('staticFilesDirectoryLabel').innerText = staticFilesDirectory
+
+    getApiDef('/restfiles/fs?path=' + staticFilesDirectory,
         (response) => {
             const jsonResponse = JSON.parse(response.responseText);
             const data = jsonResponse.items;
@@ -34,7 +37,7 @@ function addItemsToLeftSidePanel(data) {
     let ul = document.getElementById("ussFiles");
     data.forEach((item) => {
         if (item.name.includes("yml") || item.name.includes(".properties")) {
-            li += '<li class="list-group-item" ><a id="fileItem' + count + '" class="fileItem" href="#item">' + item.name + '</li>'
+            li += '<li class="list-group-item" style="border-radius: 0!important;"><a id="fileItem' + count + '" class="fileItem" href="#item">' + item.name + '</li>'
             console.log('fileItem'+count)
             count+=1;
         }
@@ -69,7 +72,7 @@ function changeFile(ul) {
 }
 
 function getFileContent(clickedElement) {
-     getApiDefContentFile('https://usilca32.lvn.broadcom.net:1443/zosmf/restfiles/fs/z/masserv/taban03/dev/instance/api-defs/' + clickedElement,
+     getApiDefContentFile('/restfiles/fs/z/masserv/taban03/dev/instance/api-defs/' + clickedElement,
         (response) => {
          console.log(response.responseText)
          fillTextAreaWithFile(response.responseText.toString());
@@ -82,10 +85,22 @@ function fillTextAreaWithFile(data) {
 }
 
 saveButton.onclick = function() {
-    console.log(fileName)
-    request('PUT','https://usilca32.lvn.broadcom.net:1443/zosmf/restfiles/fs/z/masserv/taban03/dev/instance/api-defs/' + fileName,
-        () => alert("File uploaded correctly!"),
-        () => alert("Something went wrong while uploading the file!"),
-        )
+    console.log(fileName);
+    const tabId = localStorage.getObj('activeTab').tabId;
+    const zosmfUrl = localStorage.getObj('activeHost').zosmfUrl;
+
+    chrome.tabs.sendMessage(tabId, {
+        action: "saveFile",
+        zosmfUrl: zosmfUrl,
+        filePath: '/restfiles/fs/z/masserv/taban03/dev/instance/api-defs/' + fileName,
+        body: ace.edit("editor").getValue()
+
+    }, function (res) {
+        if (res.status != 'OK') {
+            alert(res.message);
+        }
+
+       // hideLoading();
+    });
 }
 

@@ -19,12 +19,17 @@ function getActiveHost(url) {
 }
 
 function saveActiveHost(host) {
+    console.log('activeHost', host)
     localStorage.setItem('activeHost', JSON.stringify(host));
+}
+
+function saveActiveTab(tab) {
+    console.log('activeTab', tab)
+    localStorage.setItem('activeTab', JSON.stringify(tab));
 }
 
 function init() {
     chrome.webNavigation.onCompleted.addListener(function (detail) {
-        console.log(detail)
         const url = detail.url;
         const activeHost = getActiveHost(url);
         if (activeHost == null
@@ -33,6 +38,7 @@ function init() {
             return;
         }
 
+        saveActiveTab(detail);
         saveActiveHost(activeHost);
 
       //  alert(url);

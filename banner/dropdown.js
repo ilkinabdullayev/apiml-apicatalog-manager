@@ -4,7 +4,13 @@ const JOB_IDS_DROPDOWN = document.getElementById("jobIdsDropdown");
 let distinctedJobs = [];
 
 function fillJobDropdowns() {
-    callZOSMF('/restjobs/jobs?owner=*&prefix=MAS2*',
+    const jobNamePrefix = localStorage.getObj('activeHost').jobNamePrefix;
+
+    //set Prefix
+    document.getElementById('jobNamePrefixLabel').innerText = jobNamePrefix;
+
+
+    callZOSMF('/restjobs/jobs?owner=*&prefix=' + jobNamePrefix,
         'GET',
         (response) => {
             const data = JSON.parse(response.responseText);
@@ -114,12 +120,19 @@ function onChangeJobIdsDropdown() {
             const data = JSON.parse(response.responseText);
 
             const stdoutId = findSTDOUT(data);
-            writeSTDOUTIdToInputHidden(stdoutId);
-            fillShell(jobName, jobId);
+            if (typeof stdoutId !== 'undefined') {
+                writeSTDOUTIdToInputHidden(stdoutId);
+                fillShell(jobName, jobId);
+            } else {
+                clearShell();
+                addItemToJES('There is not STDOUT for ' + jobName + ':' + jobId);
+                hideLoading();
+            }
         },
         error => {
-            writeSTDOUTIdToInputHidden(103);
-            fillShell(jobName, jobId);
+            clearShell();
+            addItemToJES('Get files error when  STDOUT for ' + jobName + ':' + jobId);
+            hideLoading();
         });
 }
 
@@ -127,12 +140,12 @@ function toggleButtonStatus(e) {
     const startStopButton = document.getElementById("startStopButton");
     const dataStatus = e.getAttribute('data-status');
     if (dataStatus == 'ACTIVE') {
-        startStopButton.setAttribute('data-status', 'stopped');
+        startStopButton.setAttribute('data-status', 'started');
         startStopButton.innerHTML = '<i class="glyphicon glyphicon-stop"></i>\n' +
             '                    &nbsp;\n' +
             '                    Stop';
     } else {
-        startStopButton.setAttribute('data-status', 'started');
+        startStopButton.setAttribute('data-status', 'stopped');
         startStopButton.innerHTML = '<i class="glyphicon glyphicon-play"></i>\n' +
             '                    &nbsp;\n' +
             '                    Start';

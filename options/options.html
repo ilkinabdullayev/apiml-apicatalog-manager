@@ -18,24 +18,34 @@
             <th>Hostname</th>
             <th>Gateway URL</th>
             <th>ZOSMF URL</th>
+            <th>Job names prefix</th>
+            <th>Static files location</th>
         </tr>
         </thead>
         <tbody>
         <tr>
-            <td colspan="3">Loading hostnames...</td>
+            <td colspan="5">Loading hostnames...</td>
         </tr>
         </tbody>
     </table>
 
     <div class="row">
-        <div class="col-sm-3" style="margin-bottom: 7px">
+        <div class="col-sm-4" style="margin-bottom: 7px">
             <input type="text" class="form-control" placeholder="Hostname" id="hostnameInputText">
         </div>
-        <div class="col-sm-3" style="margin-bottom: 7px">
+        <div class="col-sm-4" style="margin-bottom: 7px">
             <input type="text" class="form-control" placeholder="Gateway URL" id="gatewayUrlInputText">
         </div>
-        <div class="col-sm-3" style="margin-bottom: 7px">
+        <div class="col-sm-4" style="margin-bottom: 7px">
             <input type="text" class="form-control" placeholder="ZOSMF URL" id="zosmfUrlInputText">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3" style="margin-bottom: 7px">
+            <input type="text" class="form-control" placeholder="Jobname prefix(mas2*)" id="jobNamePrefixInputText">
+        </div>
+        <div class="col-sm-3" style="margin-bottom: 7px">
+            <input type="text" class="form-control" placeholder="Static files directory /**" id="staticFilesDirectoryInputText">
         </div>
         <div class="col-sm-3" style="margin-bottom: 7px">
             <button class="btn btn-default" type="submit" id="addHostButton">
