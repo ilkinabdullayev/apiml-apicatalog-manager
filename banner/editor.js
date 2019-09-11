@@ -12,7 +12,7 @@ function configureEditor() {
         autoScrollEditorIntoView: true,
         copyWithEmptySelection: true,
         maxLines: Infinity,
-        minLines: 52,
+        minLines: 200,
         showPrintMargin: false
     });
 
