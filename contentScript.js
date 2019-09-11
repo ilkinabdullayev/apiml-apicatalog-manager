@@ -14,8 +14,7 @@ function addBanner(section, serviceId) {
 
     chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
         if (request.action == "stopJob") {
-            stopJob(
-                request.zosmfUrl, request.jobName, request.jobId,
+            stopJob(request,
                 () => {
                     console.log('Success stop job');
                     sendResponse({status: "OK"});
@@ -24,8 +23,7 @@ function addBanner(section, serviceId) {
                     sendResponse({status: "FAIL"});
                 });
         } else if (request.action == "startJob") {
-            startJob(
-                request.zosmfUrl, request.jobName,
+            startJob(request,
                 () => {
                     console.log('Success start job');
                     sendResponse({status: "OK"});
@@ -34,8 +32,7 @@ function addBanner(section, serviceId) {
                     sendResponse({status: "FAIL", message: error});
                 });
         } else if (request.action == "saveFile") {
-            saveFile(
-                request.zosmfUrl, request.filePath, request.body,
+            saveFile(request,
                 () => {
                     console.log('Success save file');
                     sendResponse({status: "OK"});
@@ -101,22 +98,14 @@ function addLink(content, url) {
     content.appendChild(link);
 }
 
-function addScript(content, url) {
-    const script = document.createElement("script");
-    script.src = chrome.extension.getURL(url);
-
-    content.appendChild(script);
-}
-
-
 init();
 
 //////
-function stopJob(zosmfUrl, jobName, jobId, onComplete, onFail) {
+function stopJob(request, onComplete, onFail) {
     try {
         let xhttp = new XMLHttpRequest();
-        xhttp.open('DELETE', zosmfUrl + '/zosmf/restjobs/jobs/' + jobName + '/' + jobId);
-        xhttp.setRequestHeader("Authorization", "Basic YXBpbXRzdDp0c3RtaXBhMQ==");
+        xhttp.open('DELETE', request.zosmfUrl + '/zosmf/restjobs/jobs/' + request.jobName + '/' + request.jobId);
+        xhttp.setRequestHeader("Authorization", "Basic " + request.basicDigest);
         xhttp.setRequestHeader("X-CSRF-ZOSMF-HEADER", "");
         xhttp.setRequestHeader("Accept", "application/json");
         xhttp.onload = function () {
@@ -152,11 +141,11 @@ function stopJob(zosmfUrl, jobName, jobId, onComplete, onFail) {
 
 }
 
-function startJob(zosmfUrl, jobname, onComplete, onFail) {
+function startJob(request, onComplete, onFail) {
     try {
         let xhttp = new XMLHttpRequest();
-        xhttp.open('PUT', zosmfUrl + '/zosmf/restconsoles/consoles/defcn');
-        xhttp.setRequestHeader("Authorization", "Basic YXBpbXRzdDp0c3RtaXBhMQ==");
+        xhttp.open('PUT', request.zosmfUrl + '/zosmf/restconsoles/consoles/defcn');
+        xhttp.setRequestHeader("Authorization", "Basic " + request.basicDigest);
         xhttp.setRequestHeader("X-CSRF-ZOSMF-HEADER", "");
 
         xhttp.onload = function () {
@@ -183,7 +172,7 @@ function startJob(zosmfUrl, jobname, onComplete, onFail) {
             }
         };
 
-        xhttp.send("{\"cmd\":\"s " + jobname + "\"}");
+        xhttp.send("{\"cmd\":\"s " + request.jobName + "\"}");
     } catch (e) {
         if (typeof onFail === "function") {
             onFail('Unknown Error Occured. Server response not received.');
@@ -191,11 +180,11 @@ function startJob(zosmfUrl, jobname, onComplete, onFail) {
     }
 }
 
-function saveFile(zosmfUrl, filePath, body, onComplete, onFail) {
+function saveFile(request, onComplete, onFail) {
     try {
         let xhttp = new XMLHttpRequest();
-        xhttp.open('PUT', zosmfUrl + '/zosmf' + filePath);
-        xhttp.setRequestHeader("Authorization", "Basic YXBpbXRzdDp0c3RtaXBhMQ==");
+        xhttp.open('PUT', request.zosmfUrl + '/zosmf' + request.filePath);
+        xhttp.setRequestHeader("Authorization", "Basic " + request.basicDigest);
         xhttp.setRequestHeader("X-CSRF-ZOSMF-HEADER", "");
         xhttp.setRequestHeader("X-IBM-Data-Type", 'binary');
         xhttp.setRequestHeader("Accept", "application/json");

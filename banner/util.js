@@ -39,10 +39,12 @@ function del(url, onComplete, onFail) {
 }
 
 function request(method, url, onComplete, onFail) {
+    const basicDigest = localStorage.getObj('activeHost').basicDigest;
+
     try {
         let xhttp = new XMLHttpRequest();
         xhttp.open(method, url);
-        xhttp.setRequestHeader("Authorization", "Basic YXBpbXRzdDp0c3RtaXBhMQ==");
+        xhttp.setRequestHeader("Authorization", "Basic " + basicDigest);
         xhttp.setRequestHeader("X-CSRF-ZOSMF-HEADER", "");
         xhttp.setRequestHeader("Accept", "application/json");
         xhttp.onload = function () {
@@ -78,11 +80,11 @@ function request(method, url, onComplete, onFail) {
 }
 
 function getApiDef(path, onComplete) {
-    const zosmfUrl = localStorage.getObj('activeHost').zosmfUrl;
+    const { zosmfUrl, basicDigest } = localStorage.getObj('activeHost');
 
     let xhttp = new XMLHttpRequest();
     xhttp.open('GET',zosmfUrl + '/zosmf' + path);
-    xhttp.setRequestHeader("Authorization", "Basic dGFiYW4wMzpuZXJvMjQwNw==");
+    xhttp.setRequestHeader("Authorization", "Basic " + basicDigest);
     xhttp.setRequestHeader("Accept", "application/json");
     xhttp.setRequestHeader("X-CSRF-ZOSMF-HEADER", '' );
     xhttp.onload = function() {
@@ -96,11 +98,11 @@ function getApiDef(path, onComplete) {
 }
 
 function getApiDefContentFile(path, onComplete) {
-    const zosmfUrl = localStorage.getObj('activeHost').zosmfUrl;
+    const { zosmfUrl, basicDigest } = localStorage.getObj('activeHost');
 
     let xhttp = new XMLHttpRequest();
     xhttp.open('GET', zosmfUrl + '/zosmf' + path);
-    xhttp.setRequestHeader("Authorization", "Basic dGFiYW4wMzpuZXJvMjQwNw==");
+    xhttp.setRequestHeader("Authorization", "Basic " + basicDigest);
     xhttp.setRequestHeader("X-CSRF-ZOSMF-HEADER", '');
     xhttp.setRequestHeader("X-IBM-Data-Type", 'binary');
     xhttp.onload = function() {

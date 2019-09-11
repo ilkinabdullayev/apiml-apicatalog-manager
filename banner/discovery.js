@@ -3,11 +3,8 @@ let select = document.getElementById('discoveryDropdown');
 let refreshButton = document.getElementById('refreshDiscovery');
 
 function initializeEureka() {
-    let serviceId = getParamValue('serviceId');
-    serviceId = (serviceId == 'dashboard') ? '' : '/' + serviceId;
-
     const discoveryUrl = localStorage.getObj('activeHost').discoveryUrl;
-    get(discoveryUrl + '/eureka/apps' + serviceId,
+    get(discoveryUrl + '/eureka/apps',
         (response) => {
             const jsonResponse = JSON.parse(response.responseText);
 

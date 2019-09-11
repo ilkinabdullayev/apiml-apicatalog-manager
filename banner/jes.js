@@ -55,10 +55,11 @@ function stopJob() {
     const jobName = document.getElementById("jobNamesDropdown").value;
     const jobId = document.getElementById("jobIdsDropdown").value;
     const tabId = localStorage.getObj('activeTab').tabId;
-    const zosmfUrl = localStorage.getObj('activeHost').zosmfUrl;
+    const { zosmfUrl, basicDigest } = localStorage.getObj('activeHost');
     chrome.tabs.sendMessage(tabId, {
         action: "stopJob",
         zosmfUrl: zosmfUrl,
+        basicDigest: basicDigest,
         jobName: jobName,
         jobId: jobId
     }, function (res) {
@@ -72,11 +73,12 @@ function stopJob() {
 
 function startJob() {
     const tabId = localStorage.getObj('activeTab').tabId;
-    const zosmfUrl = localStorage.getObj('activeHost').zosmfUrl;
+    const { zosmfUrl, basicDigest } = localStorage.getObj('activeHost');
     const jobName = document.getElementById("jobNamesDropdown").value;
     chrome.tabs.sendMessage(tabId, {
         action: "startJob",
         zosmfUrl: zosmfUrl,
+        basicDigest: basicDigest,
         jobName: jobName
     }, function (res) {
         if (res.status != 'OK') {

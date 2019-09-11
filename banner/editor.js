@@ -88,12 +88,12 @@ function fillTextAreaWithFile(data) {
 saveButton.onclick = function() {
     console.log(fileName);
     const tabId = localStorage.getObj('activeTab').tabId;
-    const zosmfUrl = localStorage.getObj('activeHost').zosmfUrl;
-    const staticFilesDirectory = localStorage.getObj('activeHost').staticFilesDirectory;
+    const { zosmfUrl, basicDigest, staticFilesDirectory } = localStorage.getObj('activeHost');
 
     chrome.tabs.sendMessage(tabId, {
         action: "saveFile",
         zosmfUrl: zosmfUrl,
+        basicDigest: basicDigest,
         filePath: '/restfiles/fs' + staticFilesDirectory + '/' + fileName,
         body: ace.edit("editor").getValue()
 
