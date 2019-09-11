@@ -7,6 +7,10 @@ const ul = document.getElementById('actionTabs');
 ul.onclick = function(event) {
     let targetNav = getEventTarget(event);
     let targetNavId = targetNav.getAttribute("href");
+    if (targetNavId == null) {
+        return;
+    }
+
     targetNavId = targetNavId.substring(1);
 
     let existedClassesA = targetNav.getAttribute("class");

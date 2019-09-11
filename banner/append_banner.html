@@ -69,6 +69,10 @@
                     &nbsp;
                     Start
                 </button>
+
+                <button id="refreshConsoleButton" data-status="stopped" type="button" class="btn btn-primary btn-sm" style="float: right">
+                    <i class="glyphicon glyphicon-repeat"></i>
+                </button>
             </ol>
             <!---Filter-->
             <!---Banner-->
@@ -95,7 +99,10 @@
                     </select>
                 </div>
                 <div class="col-sm-3">
-                    <button id="refreshDiscovery" type="button" class="btn btn-primary btn-sm">Refresh API static definitions</button>
+                    <button id="refreshDiscovery" type="button" class="btn btn-primary btn-sm" style="float:right; margin: 5px">
+                        <i class="glyphicon glyphicon-repeat"></i> &nbsp;
+                        Refresh API static definitions
+                    </button>
                 </div>
             </div>
             <div id="eurekaInstancesViewer" style="height: 500px;overflow: scroll"></div>

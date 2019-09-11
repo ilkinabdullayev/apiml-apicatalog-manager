@@ -104,12 +104,12 @@ init();
 function stopJob(request, onComplete, onFail) {
     try {
         let xhttp = new XMLHttpRequest();
-        xhttp.open('DELETE', request.zosmfUrl + '/zosmf/restjobs/jobs/' + request.jobName + '/' + request.jobId);
+        xhttp.open('PUT', request.zosmfUrl + '/zosmf/restjobs/jobs/' + request.jobName + '/' + request.jobId);
         xhttp.setRequestHeader("Authorization", "Basic " + request.basicDigest);
         xhttp.setRequestHeader("X-CSRF-ZOSMF-HEADER", "");
-        xhttp.setRequestHeader("Accept", "application/json");
+        xhttp.setRequestHeader("Content-Type", "application/json");
         xhttp.onload = function () {
-            if (xhttp.status == "200" || xhttp.status == "202") {
+            if (xhttp.status == "200") {
                 console.log('jsonResponse', xhttp.responseText);
                 onComplete();
             } else {
@@ -132,7 +132,10 @@ function stopJob(request, onComplete, onFail) {
             }
         };
 
-        xhttp.send();
+        xhttp.send("{\n" +
+            "\"request\":\"cancel\",\n" +
+            "\"version\":\"2.0\"\n" +
+            "}");
     } catch (e) {
         if (typeof onFail === "function") {
             onFail('Unknown Error Occured. Server response not received.');
@@ -144,9 +147,10 @@ function stopJob(request, onComplete, onFail) {
 function startJob(request, onComplete, onFail) {
     try {
         let xhttp = new XMLHttpRequest();
-        xhttp.open('PUT', request.zosmfUrl + '/zosmf/restconsoles/consoles/defcn');
+        xhttp.open('PUT', request.zosmfUrl + '/zosmf/restconsoles/consoles/jes2');
         xhttp.setRequestHeader("Authorization", "Basic " + request.basicDigest);
         xhttp.setRequestHeader("X-CSRF-ZOSMF-HEADER", "");
+        xhttp.setRequestHeader("Content-Type", "application/json");
 
         xhttp.onload = function () {
             if (xhttp.status == "200") {
@@ -212,7 +216,7 @@ function saveFile(request, onComplete, onFail) {
             }
         };
 
-        xhttp.send(body);
+        xhttp.send(request.body);
     } catch (e) {
         if (typeof onFail === "function") {
             onFail('Unknown Error Occured. Server response not received.');

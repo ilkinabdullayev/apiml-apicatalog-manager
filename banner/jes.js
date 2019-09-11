@@ -1,6 +1,7 @@
 const JES_SHELL = document.getElementById("jesShell");
 const JES_SHELL_LOAD = document.querySelectorAll("#jes-panel .loading")[0];
 const START_STOP_BUTTON = document.getElementById("startStopButton");
+const REFRESH_CONSOLE_BUTTON = document.getElementById("refreshConsoleButton");
 
 function fillShell(jobName, jobId, jobFileId) {
     clearShell();
@@ -31,6 +32,9 @@ START_STOP_BUTTON.onclick = function(element) {
     toggleButton(this);
 }
 
+REFRESH_CONSOLE_BUTTON.onclick = function(element) {
+    onChangeJobFilesDropdown();
+}
 
 function toggleButton(e) {
     const dataStatus = e.getAttribute('data-status');

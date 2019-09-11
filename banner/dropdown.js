@@ -147,7 +147,7 @@ function onChangeJobIdsDropdown() {
 function onChangeJobFilesDropdown() {
     const jobName = JOB_NAMES_DROPDOWN.value;
     const jobId = JOB_IDS_DROPDOWN.value;
-    const jobFileId = this.value;
+    const jobFileId = JOB_FILES_DROPDOWN.value;
     console.info('jobName', jobName)
     console.info('jobId', jobId)
     console.info('jobFileId', jobFileId)
