@@ -1,15 +1,13 @@
 const JES_SHELL = document.getElementById("jesShell");
 const JES_SHELL_LOAD = document.querySelectorAll("#jes-panel .loading")[0];
 const START_STOP_BUTTON = document.getElementById("startStopButton");
-const STDOUT_ID_HIDDEN_INPUT = document.getElementById('stdoutId');
 
-function fillShell(jobName, jobId) {
+function fillShell(jobName, jobId, jobFileId) {
     clearShell();
     showLoading();
     addItemToJES('Please wait. It\'s fetching from service...');
 
-    const stdoutId = STDOUT_ID_HIDDEN_INPUT.value;
-    callZOSMF('/restjobs/jobs/' + jobName + '/' + jobId + '/files/' + stdoutId + '/records',
+    callZOSMF('/restjobs/jobs/' + jobName + '/' + jobId + '/files/' + jobFileId + '/records',
         'GET',
         response => {
             const data = response.responseText;
