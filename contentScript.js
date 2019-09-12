@@ -81,6 +81,7 @@ function init() {
             iFrame.style.height = "100vh";
             this.setAttribute('data-status', 'full-fulled');
             this.innerHTML = '<i class="glyphicon glyphicon-resize-small"></i>';
+            smoothscroll();
         } else {
             this.setAttribute('data-status', 'not-fulled');
             this.innerHTML = '<i class="glyphicon glyphicon-resize-full"></i>';
@@ -98,6 +99,15 @@ function addLink(content, url) {
 
     content.appendChild(link);
 }
+
+function smoothscroll(){
+    var currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
+    if (currentScroll > 0) {
+        window.requestAnimationFrame(smoothscroll);
+        window.scrollTo (0,currentScroll - (currentScroll/5));
+    }
+}
+
 
 init();
 
