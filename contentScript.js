@@ -59,7 +59,8 @@ function init() {
         '    </button>';
 
 
-    addLink(content, chrome.extension.getURL("statics/bootstrap.min.css"));
+    addLink(content, chrome.extension.getURL("statics/glyphicon.css"));
+    addLink(content, chrome.extension.getURL("fullscreenbutton.css"));
     //
     addBanner(content, serviceId);
     //
