@@ -11,9 +11,6 @@
     right: 0;
     bottom: 0;
     left: 0;
-    position: relative;
-    height: 100%;
-    width: 100%;
 }
 
 #saveButton {
@@ -41,27 +38,4 @@
 
 .ace_search.right {
     right: 25px;
-}
-
-.ace_content {
-    position: relative;
-}
-
-#ext {
-    position: relative;
-}
-
-.row {
-    position: fixed;
-    overflow: auto;
-    width: 110%;
-    height: 100%;
-}
-
-.col-sm-3 {
-    width: 20%;
-}
-
-.col-sm-9 {
-    width: 80%;
 }
