@@ -24,19 +24,17 @@
 </style>
 <body style="margin: 0px;overflow: hidden;">
 <!--Nav Tab Headers-->
-<div id="ext">
-    <ul class="nav nav-tabs" id="actionTabs">
-        <li class="nav-item">
-            <a class="nav-link active" href="#jes">JES</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#discovery">APIML Discovery</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#staticinstances">APIML Static Instances</a>
-        </li>
-    </ul>
-</div>
+<ul class="nav nav-tabs" id="actionTabs">
+    <li class="nav-item">
+        <a class="nav-link active" href="#jes">JES</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#discovery">APIML Discovery</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#staticinstances">APIML Static Instances</a>
+    </li>
+</ul>
 <!--Nav Tab Headers-->
 <!--Nav Tab Sections-->
 <div class="tab-content" id="actionTabsContent">
@@ -109,6 +107,8 @@
         <!---Eureka Panel-->
         </div>
     </div>
+    <div class="tab-pane" id="staticinstances">
+        <div id="staticinstances-panel">
             <div class="row">
                 <div class="col-sm-3" style="padding-right: 0px">
                     <div class="panel panel-default" style="display: block!important;padding: 0!important;">
@@ -119,8 +119,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-9">
-                        <div id="editor" class="ace_content"></div>
+                <div class="col-sm-9" style="height:100vh;overflow: auto">
+                    <div id="editor" class="ace_content"></div>
                 </div>
             </div>
 
@@ -132,7 +132,8 @@
                 <button id="searchButton" type="button" class="btn btn-primary btn-md">
                     <span class="glyphicon glyphicon-search"></span> </button>
             </div>
-</div>
+        </div>
+    </div>
 </div>
 <!--Nav Tab Sections-->
 <script type="text/javascript" src="util.js"></script>
