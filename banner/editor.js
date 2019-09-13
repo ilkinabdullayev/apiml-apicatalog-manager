@@ -102,6 +102,7 @@ saveButton.onclick = function() {
             alert(res.message);
         }
 
+        alert('File has been changed successfully')
        // hideLoading();
     });
 }
