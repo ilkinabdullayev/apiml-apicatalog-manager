@@ -100,6 +100,7 @@ saveButton.onclick = function() {
     }, function (res) {
         if (res.status != 'OK') {
             alert(res.message);
+            return;
         }
 
         alert('File has been changed successfully')
