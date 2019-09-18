@@ -11,37 +11,67 @@
     <title>Settings</title>
 </head>
 <body>
-<div class="container">
-    <table id="hostTable" class="table table-bordered table-striped table-condensed">
+<div style="min-width: 700px; padding: 4px;">
+    <table id="hostTable" class="table table-bordered table-striped" style="overflow-x:auto;">
         <thead>
         <tr>
             <th>Hostname</th>
             <th>Gateway URL</th>
+            <th>Discovery URL</th>
             <th>ZOSMF URL</th>
+            <th>Job names prefix</th>
+            <th>Static files location</th>
+            <th>Operations</th>
         </tr>
         </thead>
         <tbody>
         <tr>
-            <td colspan="3">Loading hostnames...</td>
+            <td colspan="7">Loading hostnames...</td>
         </tr>
         </tbody>
     </table>
 
-    <div class="row">
-        <div class="col-sm-3" style="margin-bottom: 7px">
-            <input type="text" class="form-control" placeholder="Hostname" id="hostnameInputText">
-        </div>
-        <div class="col-sm-3" style="margin-bottom: 7px">
-            <input type="text" class="form-control" placeholder="Gateway URL" id="gatewayUrlInputText">
-        </div>
-        <div class="col-sm-3" style="margin-bottom: 7px">
-            <input type="text" class="form-control" placeholder="ZOSMF URL" id="zosmfUrlInputText">
-        </div>
-        <div class="col-sm-3" style="margin-bottom: 7px">
-            <button class="btn btn-default" type="submit" id="addHostButton">
-                <i class="glyphicon glyphicon-plus"></i>
-                Add Host
-            </button>
+    <div class="panel panel-primary small">
+        <div class="panel-heading">Add Configuration</div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-sm-4" style="margin-bottom: 7px">
+                    <input type="text" class="form-control" placeholder="Hostname" id="hostnameInputText">
+                </div>
+                <div class="col-sm-4" style="margin-bottom: 7px">
+                    <input type="text" class="form-control" placeholder="Gateway URL" id="gatewayUrlInputText">
+                </div>
+                <div class="col-sm-4" style="margin-bottom: 7px">
+                    <input type="text" class="form-control" placeholder="Discovery URL" id="discoveryUrlInputText">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-4" style="margin-bottom: 7px">
+                    <input type="text" class="form-control" placeholder="ZOSMF URL" id="zosmfUrlInputText">
+                </div>
+                <div class="col-sm-4" style="margin-bottom: 7px">
+                    <input type="text" class="form-control" placeholder="Username" id="zosmfUsernameInputText">
+                </div>
+                <div class="col-sm-4" style="margin-bottom: 7px">
+                    <input type="password" class="form-control" placeholder="Password" id="zosmfPasswordInputText">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-4" style="margin-bottom: 7px">
+                    <input type="text" class="form-control" placeholder="Jobname prefix(mas2*)" id="jobNamePrefixInputText">
+                </div>
+                <div class="col-sm-4" style="margin-bottom: 7px">
+                    <input type="text" class="form-control" placeholder="Static files directory /**" id="staticFilesDirectoryInputText">
+                </div>
+                <div class="col-sm-3" style="margin-bottom: 7px">
+                    <button class="btn btn-default" type="submit" id="addHostButton">
+                        <i class="glyphicon glyphicon-plus"></i>
+                        Add
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 </div>

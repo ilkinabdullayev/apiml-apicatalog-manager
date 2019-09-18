@@ -17,22 +17,22 @@
     border-radius: 50%;
     text-align: center;
     text-decoration: none;
-    height: 70px;
-    width: 70px;
+    height: 50px;
+    width: 50px;
 }
 
 #searchButton {
     border-radius: 50%;
     text-align: center;
     text-decoration: none;
-    height: 70px;
-    width: 70px;
+    height: 50px;
+    width: 50px;
 }
 
 .action-buttons {
     position: absolute;
-    top: 115px;
-    right: 50px;
+    top: 70px;
+    right: 0px;
     width: 65px;
 }
 

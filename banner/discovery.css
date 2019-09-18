@@ -1,0 +1,8 @@
+#eurekaInstancesViewer {
+    overflow: scroll;
+}
+
+#discoveryDropdown {
+    width: 80%;
+    margin: 6px 2%;
+}

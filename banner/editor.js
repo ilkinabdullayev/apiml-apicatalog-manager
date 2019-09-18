@@ -12,14 +12,17 @@ function configureEditor() {
         autoScrollEditorIntoView: true,
         copyWithEmptySelection: true,
         maxLines: Infinity,
-        minLines: 52,
+        minLines: 200,
         showPrintMargin: false
     });
 
 }
 
 function getApiDefContentFileName() {
-    getApiDef('https://usilca32.lvn.broadcom.net:1443/zosmf/restfiles/fs?path=/z/masserv/taban03/dev/instance/api-defs',
+    const staticFilesDirectory = localStorage.getObj('activeHost').staticFilesDirectory;
+    document.getElementById('staticFilesDirectoryLabel').innerText = staticFilesDirectory
+
+    getApiDef('/restfiles/fs?path=' + staticFilesDirectory,
         (response) => {
             const jsonResponse = JSON.parse(response.responseText);
             const data = jsonResponse.items;
@@ -33,8 +36,8 @@ function addItemsToLeftSidePanel(data) {
     let count = 0;
     let ul = document.getElementById("ussFiles");
     data.forEach((item) => {
-        if (item.name.includes("yml") || item.name.includes(".properties")) {
-            li += '<li class="list-group-item" ><a id="fileItem' + count + '" class="fileItem" href="#item">' + item.name + '</li>'
+        if (item.name.includes(".yml") || item.name.includes(".properties")) {
+            li += '<li class="list-group-item" style="border-radius: 0!important;"><a id="fileItem' + count + '" class="fileItem" href="#item">' + item.name + '</li>'
             console.log('fileItem'+count)
             count+=1;
         }
@@ -69,7 +72,8 @@ function changeFile(ul) {
 }
 
 function getFileContent(clickedElement) {
-     getApiDefContentFile('https://usilca32.lvn.broadcom.net:1443/zosmf/restfiles/fs/z/masserv/taban03/dev/instance/api-defs/' + clickedElement,
+    const staticFilesDirectory = localStorage.getObj('activeHost').staticFilesDirectory;
+     getApiDefContentFile('/restfiles/fs' + staticFilesDirectory + '/' + clickedElement,
         (response) => {
          console.log(response.responseText)
          fillTextAreaWithFile(response.responseText.toString());
@@ -82,10 +86,25 @@ function fillTextAreaWithFile(data) {
 }
 
 saveButton.onclick = function() {
-    console.log(fileName)
-    request('PUT','https://usilca32.lvn.broadcom.net:1443/zosmf/restfiles/fs/z/masserv/taban03/dev/instance/api-defs/' + fileName,
-        () => alert("File uploaded correctly!"),
-        () => alert("Something went wrong while uploading the file!"),
-        )
+    console.log(fileName);
+    const tabId = localStorage.getObj('activeTab').tabId;
+    const { zosmfUrl, basicDigest, staticFilesDirectory } = localStorage.getObj('activeHost');
+
+    chrome.tabs.sendMessage(tabId, {
+        action: "saveFile",
+        zosmfUrl: zosmfUrl,
+        basicDigest: basicDigest,
+        filePath: '/restfiles/fs' + staticFilesDirectory + '/' + fileName,
+        body: ace.edit("editor").getValue()
+
+    }, function (res) {
+        if (res.status != 'OK') {
+            alert(res.message);
+            return;
+        }
+
+        alert('File has been changed successfully')
+       // hideLoading();
+    });
 }
 

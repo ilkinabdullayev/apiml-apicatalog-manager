@@ -1,15 +1,14 @@
 const JES_SHELL = document.getElementById("jesShell");
 const JES_SHELL_LOAD = document.querySelectorAll("#jes-panel .loading")[0];
 const START_STOP_BUTTON = document.getElementById("startStopButton");
-const STDOUT_ID_HIDDEN_INPUT = document.getElementById('stdoutId');
+const REFRESH_CONSOLE_BUTTON = document.getElementById("refreshConsoleButton");
 
-function fillShell(jobName, jobId) {
+function fillShell(jobName, jobId, jobFileId) {
     clearShell();
     showLoading();
     addItemToJES('Please wait. It\'s fetching from service...');
 
-    const stdoutId = validateStdoutId();
-    callZOSMF('/restjobs/jobs/' + jobName + '/' + jobId + '/files/' + stdoutId + '/records',
+    callZOSMF('/restjobs/jobs/' + jobName + '/' + jobId + '/files/' + jobFileId + '/records',
         'GET',
         response => {
             const data = response.responseText;
@@ -30,12 +29,12 @@ function fillShell(jobName, jobId) {
 
 START_STOP_BUTTON.onclick = function(element) {
     showLoading();
-
     toggleButton(this);
-
-    stopJob();
 }
 
+REFRESH_CONSOLE_BUTTON.onclick = function(element) {
+    onChangeJobFilesDropdown();
+}
 
 function toggleButton(e) {
     const dataStatus = e.getAttribute('data-status');
@@ -44,24 +43,54 @@ function toggleButton(e) {
         e.innerHTML = '<i class="glyphicon glyphicon-stop"></i>\n' +
             '                    &nbsp;\n' +
             '                    Stop';
+
+        startJob();
     } else if (dataStatus == 'started') {
         e.setAttribute('data-status', 'stopped');
         e.innerHTML = '<i class="glyphicon glyphicon-play"></i>\n' +
             '                    &nbsp;\n' +
             '                    Start';
+
+        stopJob();
     }
 }
 
 function stopJob() {
     const jobName = document.getElementById("jobNamesDropdown").value;
     const jobId = document.getElementById("jobIdsDropdown").value;
-    del('https://ca32.ca.com:1443/zosmf/restjobs/jobs/' + jobName + '/' + jobId,
-        response => {
-            hideLoading();
-        }, error => {
-            hideLoading();
-            alert(error);
-        });
+    const tabId = localStorage.getObj('activeTab').tabId;
+    const { zosmfUrl, basicDigest } = localStorage.getObj('activeHost');
+    chrome.tabs.sendMessage(tabId, {
+        action: "stopJob",
+        zosmfUrl: zosmfUrl,
+        basicDigest: basicDigest,
+        jobName: jobName,
+        jobId: jobId
+    }, function (res) {
+        if (res.status != 'OK') {
+            alert(res.message);
+        }
+
+        hideLoading();
+    });
+}
+
+function startJob() {
+    const tabId = localStorage.getObj('activeTab').tabId;
+    const { zosmfUrl, basicDigest } = localStorage.getObj('activeHost');
+    const jobName = document.getElementById("jobNamesDropdown").value;
+    chrome.tabs.sendMessage(tabId, {
+        action: "startJob",
+        zosmfUrl: zosmfUrl,
+        basicDigest: basicDigest,
+        jobName: jobName
+    }, function (res) {
+        if (res.status != 'OK') {
+            alert(res.message);
+        }
+
+        hideLoading();
+    });
 }
 
 
@@ -83,12 +112,4 @@ function showLoading() {
 
 function hideLoading() {
     JES_SHELL_LOAD.style.display = 'none';
-}
-
-function validateStdoutId() {
-    if (STDOUT_ID_HIDDEN_INPUT.value == '') {
-        return 103;
-    }
-
-    return STDOUT_ID_HIDDEN_INPUT.value;
 }

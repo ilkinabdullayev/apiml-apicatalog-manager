@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="shell.css"/>
     <link rel="stylesheet" href="breadcrumb.css"/>
     <link rel="stylesheet" href="editor.css"/>
+    <link rel="stylesheet" href="discovery.css"/>
     <link rel="stylesheet" href="../json-viewer/json-viewer.css"/>
 </head>
 <style>
@@ -39,10 +40,9 @@
 <div class="tab-content" id="actionTabsContent">
     <div class="tab-pane show active" id="jes">
         <div id="jes-panel">
-            <input type="hidden" id="stdoutId"/>
             <!---Filter-->
             <ol class="breadcrumb" style="margin: 0;border-radius: 0!important">
-                <li>APIML Jobs</li>
+                <li>APIML Jobs: <b id="jobNamePrefixLabel">*</b></li>
 
                 <li class="relative drop-container">
                     <select id="jobNamesDropdown">
@@ -56,10 +56,20 @@
                     </select>
                 </li>
 
+                <li class="relative drop-container">
+                    <select id="jobFilesDropdown">
+                        <!-- <option value="">A</option>-->
+                    </select>
+                </li>
+
                 <button id="startStopButton" data-status="stopped" type="button" class="btn btn-primary btn-sm" style="margin-left: 20px">
                     <i class="glyphicon glyphicon-play"></i>
                     &nbsp;
                     Start
+                </button>
+
+                <button id="refreshConsoleButton" data-status="stopped" type="button" class="btn btn-primary btn-sm" style="float: right">
+                    <i class="glyphicon glyphicon-repeat"></i>
                 </button>
             </ol>
             <!---Filter-->
@@ -79,23 +89,38 @@
     </div>
     <div class="tab-pane" id="discovery">
         <!--Eureka Panel-->
-        <div id="eureka-panel" style="height: 100vh;overflow: scroll"></div>
+        <div id="eureka-panel">
+            <div class="row">
+                <div class="col-sm-9">
+                    <select id="discoveryDropdown">
+                        <option value="">All</option>
+                    </select>
+                </div>
+                <div class="col-sm-3">
+                    <button id="refreshDiscovery" type="button" class="btn btn-primary btn-sm" style="float:right; margin: 5px">
+                        <i class="glyphicon glyphicon-repeat"></i> &nbsp;
+                        Refresh API static definitions
+                    </button>
+                </div>
+            </div>
+            <div id="eurekaInstancesViewer" style="height: 100vh;overflow: scroll"></div>
         <!---Eureka Panel-->
+        </div>
     </div>
     <div class="tab-pane" id="staticinstances">
         <div id="staticinstances-panel">
             <div class="row">
-                <div class="col-sm-3">
-                    <button type="button" class="accordion">/api-def</button>
-                    <div>
-                        <ul class="list-group" id="ussFiles">
-                        </ul>
+                <div class="col-sm-3" style="padding-right: 0px">
+                    <div class="panel panel-default" style="display: block!important;padding: 0!important;">
+                        <div class="panel-heading" id="staticFilesDirectoryLabel">/directory</div>
+                        <div class="panel-body" style="padding: 0!important;">
+                            <ul class="list-group" id="ussFiles" style="margin: 0!important;">
+                            </ul>
+                        </div>
                     </div>
                 </div>
-                <div class="col-sm-9">
-                <pre>
+                <div class="col-sm-9" style="height:100vh;overflow: auto">
                     <div id="editor" class="ace_content"></div>
-                </pre>
                 </div>
             </div>
 
@@ -119,6 +144,5 @@
 <script type="text/javascript" src="dropdown.js"></script>
 <script type="text/javascript" src="discovery.js"></script>
 <script type="text/javascript" src="../json-viewer/json-viewer.js"></script>
-<script type="text/javascript" src="staticinstances.js"></script>
 </body>
 </html>

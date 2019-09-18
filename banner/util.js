@@ -25,6 +25,8 @@ function callZOSMF(path, method, onComplete, onFail) {
     const zosmfUrl = localStorage.getObj('activeHost').zosmfUrl;
     if (method == 'GET') {
         get(zosmfUrl + '/zosmf' + path, onComplete, onFail);
+    } else if (method == 'DELETE') {
+        del(zosmfUrl + '/zosmf' + path, onComplete, onFail);
     }
 }
 
@@ -36,53 +38,13 @@ function del(url, onComplete, onFail) {
     request('DELETE', url, onComplete, onFail);
 }
 
-function put(url, onComplete, onFail) {
-    try {
-        let xhttp = new XMLHttpRequest();
-        xhttp.open('PUT', url);
-        xhttp.setRequestHeader("Authorization", "Basic YXBpbXRzdDp0c3RtaXBhMQ==");
-        xhttp.setRequestHeader("X-CSRF-ZOSMF-HEADER", "");
-        xhttp.setRequestHeader("Content-Type", "application/json");
-        xhttp.send("Your JSON Data Here");
-
-        xhttp.onload = function () {
-            if (xhttp.status == "200") {
-                console.log('jsonResponse', xhttp.responseText);
-                onComplete(xhttp);
-            } else {
-                console.log("Error", xhttp.statusText);
-                if (typeof onFail === "function") {
-                    onFail(xhttp.statusText);
-                }
-            }
-        };
-
-        xhttp.ontimeout = function () {
-            if (typeof onFail === "function") {
-                onFail('Timeout problem');
-            }
-        }
-
-        xhttp.onerror = function(e){
-            if (typeof onFail === "function") {
-                onFail('Unknown Error Occured. Server response not received.');
-            }
-        };
-
-        xhttp.send();
-    } catch (e) {
-        if (typeof onFail === "function") {
-            onFail('Unknown Error Occured. Server response not received.');
-        }
-    }
-}
-
-
 function request(method, url, onComplete, onFail) {
+    const basicDigest = localStorage.getObj('activeHost').basicDigest;
+
     try {
         let xhttp = new XMLHttpRequest();
         xhttp.open(method, url);
-        xhttp.setRequestHeader("Authorization", "Basic YXBpbXRzdDp0c3RtaXBhMQ==");
+        xhttp.setRequestHeader("Authorization", "Basic " + basicDigest);
         xhttp.setRequestHeader("X-CSRF-ZOSMF-HEADER", "");
         xhttp.setRequestHeader("Accept", "application/json");
         xhttp.onload = function () {
@@ -115,13 +77,14 @@ function request(method, url, onComplete, onFail) {
             onFail('Unknown Error Occured. Server response not received.');
         }
     }
-    // xhttp.send("Your JSON Data Here");
 }
 
-function getApiDef(url, onComplete) {
+function getApiDef(path, onComplete) {
+    const { zosmfUrl, basicDigest } = localStorage.getObj('activeHost');
+
     let xhttp = new XMLHttpRequest();
-    xhttp.open('GET', url);
-    xhttp.setRequestHeader("Authorization", "Basic dGFiYW4wMzpuZXJvMjQwNw==");
+    xhttp.open('GET',zosmfUrl + '/zosmf' + path);
+    xhttp.setRequestHeader("Authorization", "Basic " + basicDigest);
     xhttp.setRequestHeader("Accept", "application/json");
     xhttp.setRequestHeader("X-CSRF-ZOSMF-HEADER", '' );
     xhttp.onload = function() {
@@ -134,12 +97,14 @@ function getApiDef(url, onComplete) {
     xhttp.send();
 }
 
-function getApiDefContentFile(url, onComplete) {
+function getApiDefContentFile(path, onComplete) {
+    const { zosmfUrl, basicDigest } = localStorage.getObj('activeHost');
+
     let xhttp = new XMLHttpRequest();
-    xhttp.open('GET', url);
-    xhttp.setRequestHeader("Authorization", "Basic dGFiYW4wMzpuZXJvMjQwNw==");
-    xhttp.setRequestHeader("X-CSRF-ZOSMF-HEADER", '' );
-    xhttp.setRequestHeader("X-IBM-Data-Type", 'binary' );
+    xhttp.open('GET', zosmfUrl + '/zosmf' + path);
+    xhttp.setRequestHeader("Authorization", "Basic " + basicDigest);
+    xhttp.setRequestHeader("X-CSRF-ZOSMF-HEADER", '');
+    xhttp.setRequestHeader("X-IBM-Data-Type", 'binary');
     xhttp.onload = function() {
         if(xhttp.status == "200") {
             console.log('jsonResponse', xhttp.responseText);
@@ -153,6 +118,7 @@ function getApiDefContentFile(url, onComplete) {
 Storage.prototype.setObj = function(key, obj) {
     return this.setItem(key, JSON.stringify(obj))
 }
+
 Storage.prototype.getObj = function(key) {
     return JSON.parse(this.getItem(key))
 }
