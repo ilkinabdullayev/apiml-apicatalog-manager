@@ -10,14 +10,14 @@ There are some problems while developing for API Meditation Layer. We called the
 
 ## Installation
 You can clone the repository and open the root folder of the extension on developer mode in chrome extension page.
-1. Go to [Chrome extensions](chrome://extensions/)
+1. Go to [Chrome extensions(chrome://extensions/)](chrome://extensions/)
 2. Enable `Developer mode`
 3. Click `Load unpacked` and choose root folder of the extension 
 
 ## Configuration
 After installation api catalog icon will be enabled in the toolbar and now need to configure extension. You will see popup dialog when you click this icon.
 
-![alt text](doc-images/screen1-config-1.png)
+![alt text](doc-images/screen1.png)
 
 Click the `Configuration is need` and Configuration page will be shown as a dialog.
 
@@ -34,3 +34,18 @@ There are some parameter asked for configuration below:
 - **Static files directory**  - It's directory where your instances yaml defination is located.
 
 ### Configuration page
+You can get configuration page after right click on extension icon and choose `Options`
+
+![alt text](doc-images/screen3.png)
+
+You can add configuration or delete existed one.
+
+## How does extension work?
+
+### Certificate Requirements
+You should provide hostname certificates which is required for calling their apis safely.
+
+### Extension Banner
+After configuration extension, popup dialog will show you which APIML hosts are configured to go to the host.
+
+It will be updated soon...
