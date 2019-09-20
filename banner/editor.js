@@ -36,7 +36,7 @@ function addItemsToLeftSidePanel(data) {
     let count = 0;
     let ul = document.getElementById("ussFiles");
     data.forEach((item) => {
-        if (item.name.includes(".yml") || item.name.includes(".properties")) {
+        if (item.name.includes(".yml")  || item.name.includes(".yaml")  || item.name.includes(".properties")) {
             li += '<li class="list-group-item" style="border-radius: 0!important;"><a id="fileItem' + count + '" class="fileItem" href="#item">' + item.name + '</li>'
             console.log('fileItem'+count)
             count+=1;
