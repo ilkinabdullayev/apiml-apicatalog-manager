@@ -57,6 +57,10 @@ refreshButton.onclick = function () {
     const discoveryUrl = localStorage.getObj('activeHost').discoveryUrl;
 
     request("POST", discoveryUrl + '/discovery/api/v1/staticApi',
-        () => {alert("Static API definitions have been refreshed!")},
-        () => {alert("Something went wrong while trying to refresh Static API definitions")});
+        () => {
+            alert("Static API definitions have been refreshed!")
+        },
+        () => {
+            alert("Something went wrong while trying to refresh Static API definitions")
+        });
 }

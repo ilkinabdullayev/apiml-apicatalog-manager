@@ -75,10 +75,10 @@ function addElementToDropdownList(select, data) {
 
 function initEmptyDropDownList(select, text) {
     addElementToDropdownList(select, {
-            value: '',
-            text: text,
-            status: ''
-        });
+        value: '',
+        text: text,
+        status: ''
+    });
 }
 
 function clearDrowdown(select) {

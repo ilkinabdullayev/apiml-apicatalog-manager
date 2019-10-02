@@ -41,7 +41,7 @@ function init() {
         saveActiveTab(detail);
         saveActiveHost(activeHost);
 
-      //  alert(url);
+        //  alert(url);
         executeContentScript();
     }, {url: [{urlMatches: 'http://*'}, {urlMatches: 'https://*'}]});
 }
