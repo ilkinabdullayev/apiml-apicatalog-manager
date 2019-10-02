@@ -1,12 +1,12 @@
 .shell-wrap {
-    box-shadow: 0 0 30px rgba(0,0,0,0.4);
-  
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
+
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
-  }
-  
-  .shell-body {
+}
+
+.shell-body {
     margin: 0;
     padding: 5px 5px 100px 5px;
     height: 100vh;
@@ -22,10 +22,10 @@
     -moz-border-radius-bottomleft: 3px;
     border-bottom-right-radius: 3px;
     border-bottom-left-radius: 3px;
-  }
-  
-  .shell-body li {
+}
+
+.shell-body li {
     word-wrap: break-word;
     position: relative;
     padding: 0 0 0 15px;
-  }
+}

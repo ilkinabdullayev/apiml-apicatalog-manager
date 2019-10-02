@@ -13,8 +13,8 @@ function getParamValue(paramName) {
 function findJsonItem(array, key) {
     let foundedItem = [];
     array.forEach(item => {
-        if(item.key == key) {
-            foundedItem =  item.value;
+        if (item.key == key) {
+            foundedItem = item.value;
         }
     });
 
@@ -65,7 +65,7 @@ function request(method, url, onComplete, onFail) {
             }
         }
 
-        xhttp.onerror = function(e){
+        xhttp.onerror = function (e) {
             if (typeof onFail === "function") {
                 onFail('Unknown Error Occured. Server response not received.');
             }
@@ -80,15 +80,15 @@ function request(method, url, onComplete, onFail) {
 }
 
 function getApiDef(path, onComplete) {
-    const { zosmfUrl, basicDigest } = localStorage.getObj('activeHost');
+    const {zosmfUrl, basicDigest} = localStorage.getObj('activeHost');
 
     let xhttp = new XMLHttpRequest();
-    xhttp.open('GET',zosmfUrl + '/zosmf' + path);
+    xhttp.open('GET', zosmfUrl + '/zosmf' + path);
     xhttp.setRequestHeader("Authorization", "Basic " + basicDigest);
     xhttp.setRequestHeader("Accept", "application/json");
-    xhttp.setRequestHeader("X-CSRF-ZOSMF-HEADER", '' );
-    xhttp.onload = function() {
-        if(xhttp.status == "200") {
+    xhttp.setRequestHeader("X-CSRF-ZOSMF-HEADER", '');
+    xhttp.onload = function () {
+        if (xhttp.status == "200") {
             console.log('jsonResponse', xhttp.responseText);
             onComplete(xhttp);
         }
@@ -98,15 +98,15 @@ function getApiDef(path, onComplete) {
 }
 
 function getApiDefContentFile(path, onComplete) {
-    const { zosmfUrl, basicDigest } = localStorage.getObj('activeHost');
+    const {zosmfUrl, basicDigest} = localStorage.getObj('activeHost');
 
     let xhttp = new XMLHttpRequest();
     xhttp.open('GET', zosmfUrl + '/zosmf' + path);
     xhttp.setRequestHeader("Authorization", "Basic " + basicDigest);
     xhttp.setRequestHeader("X-CSRF-ZOSMF-HEADER", '');
     xhttp.setRequestHeader("X-IBM-Data-Type", 'binary');
-    xhttp.onload = function() {
-        if(xhttp.status == "200") {
+    xhttp.onload = function () {
+        if (xhttp.status == "200") {
             console.log('jsonResponse', xhttp.responseText);
             onComplete(xhttp);
         }
@@ -115,11 +115,11 @@ function getApiDefContentFile(path, onComplete) {
     xhttp.send();
 }
 
-Storage.prototype.setObj = function(key, obj) {
+Storage.prototype.setObj = function (key, obj) {
     return this.setItem(key, JSON.stringify(obj))
 }
 
-Storage.prototype.getObj = function(key) {
+Storage.prototype.getObj = function (key) {
     return JSON.parse(this.getItem(key))
 }
 

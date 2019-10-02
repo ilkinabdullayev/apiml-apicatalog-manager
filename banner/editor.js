@@ -28,7 +28,7 @@ function getApiDefContentFileName() {
             const data = jsonResponse.items;
 
             addItemsToLeftSidePanel(data);
-    });
+        });
 }
 
 function addItemsToLeftSidePanel(data) {
@@ -36,10 +36,10 @@ function addItemsToLeftSidePanel(data) {
     let count = 0;
     let ul = document.getElementById("ussFiles");
     data.forEach((item) => {
-        if (item.name.includes(".yml")  || item.name.includes(".yaml")  || item.name.includes(".properties")) {
+        if (item.name.includes(".yml") || item.name.includes(".yaml") || item.name.includes(".properties")) {
             li += '<li class="list-group-item" style="border-radius: 0!important;"><a id="fileItem' + count + '" class="fileItem" href="#item">' + item.name + '</li>'
-            console.log('fileItem'+count)
-            count+=1;
+            console.log('fileItem' + count)
+            count += 1;
         }
     });
 
@@ -51,7 +51,7 @@ function addItemsToLeftSidePanel(data) {
 getApiDefContentFileName();
 configureEditor();
 
-searchButton.onclick = function() {
+searchButton.onclick = function () {
 
     let editor = ace.edit("editor");
     editor.execCommand("find");
@@ -64,7 +64,7 @@ searchButton.onclick = function() {
 }
 
 function changeFile(ul) {
-    ul.onclick = function(event) {
+    ul.onclick = function (event) {
         fileName = event.target.innerText;
         getFileContent(event.target.innerText);
         event.preventDefault();
@@ -73,10 +73,10 @@ function changeFile(ul) {
 
 function getFileContent(clickedElement) {
     const staticFilesDirectory = localStorage.getObj('activeHost').staticFilesDirectory;
-     getApiDefContentFile('/restfiles/fs' + staticFilesDirectory + '/' + clickedElement,
+    getApiDefContentFile('/restfiles/fs' + staticFilesDirectory + '/' + clickedElement,
         (response) => {
-         console.log(response.responseText)
-         fillTextAreaWithFile(response.responseText.toString());
+            console.log(response.responseText)
+            fillTextAreaWithFile(response.responseText.toString());
         });
 }
 
@@ -85,10 +85,10 @@ function fillTextAreaWithFile(data) {
     event.preventDefault();
 }
 
-saveButton.onclick = function() {
+saveButton.onclick = function () {
     console.log(fileName);
     const tabId = localStorage.getObj('activeTab').tabId;
-    const { zosmfUrl, basicDigest, staticFilesDirectory } = localStorage.getObj('activeHost');
+    const {zosmfUrl, basicDigest, staticFilesDirectory} = localStorage.getObj('activeHost');
 
     chrome.tabs.sendMessage(tabId, {
         action: "saveFile",
@@ -104,7 +104,7 @@ saveButton.onclick = function() {
         }
 
         alert('File has been changed successfully')
-       // hideLoading();
+        // hideLoading();
     });
 }
 

@@ -1,6 +1,6 @@
 let addHostButton = document.getElementById('addHostButton');
 
-addHostButton.onclick = function() {
+addHostButton.onclick = function () {
     const hostnameInputText = document.getElementById('hostnameInputText');
     const gatewayUrlInputText = document.getElementById('gatewayUrlInputText');
     const discoveryUrlInputText = document.getElementById('discoveryUrlInputText');

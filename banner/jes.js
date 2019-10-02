@@ -27,12 +27,12 @@ function fillShell(jobName, jobId, jobFileId) {
         });
 }
 
-START_STOP_BUTTON.onclick = function(element) {
+START_STOP_BUTTON.onclick = function (element) {
     showLoading();
     toggleButton(this);
 }
 
-REFRESH_CONSOLE_BUTTON.onclick = function(element) {
+REFRESH_CONSOLE_BUTTON.onclick = function (element) {
     onChangeJobFilesDropdown();
 }
 
@@ -59,7 +59,7 @@ function stopJob() {
     const jobName = document.getElementById("jobNamesDropdown").value;
     const jobId = document.getElementById("jobIdsDropdown").value;
     const tabId = localStorage.getObj('activeTab').tabId;
-    const { zosmfUrl, basicDigest } = localStorage.getObj('activeHost');
+    const {zosmfUrl, basicDigest} = localStorage.getObj('activeHost');
     chrome.tabs.sendMessage(tabId, {
         action: "stopJob",
         zosmfUrl: zosmfUrl,
@@ -77,7 +77,7 @@ function stopJob() {
 
 function startJob() {
     const tabId = localStorage.getObj('activeTab').tabId;
-    const { zosmfUrl, basicDigest } = localStorage.getObj('activeHost');
+    const {zosmfUrl, basicDigest} = localStorage.getObj('activeHost');
     const jobName = document.getElementById("jobNamesDropdown").value;
     chrome.tabs.sendMessage(tabId, {
         action: "startJob",

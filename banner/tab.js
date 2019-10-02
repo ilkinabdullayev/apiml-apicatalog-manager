@@ -1,10 +1,10 @@
 function getEventTarget(e) {
     e = e || window.event;
-    return e.target || e.srcElement; 
+    return e.target || e.srcElement;
 }
 
 const ul = document.getElementById('actionTabs');
-ul.onclick = function(event) {
+ul.onclick = function (event) {
     let targetNav = getEventTarget(event);
     let targetNavId = targetNav.getAttribute("href");
     if (targetNavId == null) {
@@ -14,14 +14,14 @@ ul.onclick = function(event) {
     targetNavId = targetNavId.substring(1);
 
     let existedClassesA = targetNav.getAttribute("class");
-    if(existedClassesA.includes('active')) {
+    if (existedClassesA.includes('active')) {
         event.preventDefault();
         return;
     }
 
     deactivateAllTabHeaders();
     targetNav.setAttribute("class", existedClassesA + ' active');
-    
+
     hideAllTabSections();
     activeSelectedSection(targetNavId);
     event.preventDefault();
