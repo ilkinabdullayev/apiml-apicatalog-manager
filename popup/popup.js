@@ -10,7 +10,7 @@ function init() {
         button.setAttribute('style', 'width: 100%;margin-bottom: 5px');
         button.innerHTML = '<i class="glyphicon glyphicon-cog"></i>\n' +
             '                    &nbsp;\n' +
-            '                    Configuration is need';
+            '                    Configuration is needed';
 
         button.onclick = function(){
             chrome.tabs.update({ 'url': 'chrome://extensions/?options=' + chrome.runtime.id });

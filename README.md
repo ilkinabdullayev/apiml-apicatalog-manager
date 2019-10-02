@@ -19,7 +19,7 @@ After installation api catalog icon will be enabled in the toolbar and now need 
 
 ![alt text](doc-images/screen1.png)
 
-Click the `Configuration is need` and Configuration page will be shown as a dialog.
+Click the `Configuration is needed` and Configuration page will be shown as a dialog.
 
 ![alt text](doc-images/screen2.png)
 
