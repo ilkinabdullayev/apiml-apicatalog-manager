@@ -1,24 +1,26 @@
-  .small {
+.small {
     font-size: 10px;
-  }
-  
-  .drop-container:hover .drop {
+}
+
+.drop-container:hover .drop {
     display: block;
     z-index: 1;
 
-  }
-  .drop-container .drop {
+}
+
+.drop-container .drop {
     display: none;
     position: absolute;
     top: 20px;
     left: 8px;
-  }
-  .drop-container .drop a {
+}
+
+.drop-container .drop a {
     display: block;
     padding: 8px 16px;
-  }
+}
 
-  .accordion {
+.accordion {
     color: #337ab7;
     cursor: pointer;
     padding: 18px;
@@ -27,9 +29,9 @@
     /*border: none;*/
     outline: none;
     transition: 0.4s;
-  }
+}
 
-  /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
 
 
-  /* Style the accordion panel. Note: hidden by default */
+/* Style the accordion panel. Note: hidden by default */

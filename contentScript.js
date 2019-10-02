@@ -1,18 +1,18 @@
 const body = document.body;
 
 function addBanner(section, serviceId) {
-    let iFrame  = document.createElement("iframe");
+    let iFrame = document.createElement("iframe");
     iFrame.setAttribute("id", "actionFrame");
     iFrame.style.width = "100%";
     iFrame.style.height = "540px";
-  //  iFrame.style.background = "black";
+    //  iFrame.style.background = "black";
     iFrame.style.border = "none"
-    iFrame.src  = chrome.extension.getURL ("banner/append_banner.html?serviceId=" + serviceId);
+    iFrame.src = chrome.extension.getURL("banner/append_banner.html?serviceId=" + serviceId);
 
     section.appendChild(iFrame);
 
 
-    chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+    chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
         if (request.action == "stopJob") {
             stopJob(request,
                 () => {
@@ -59,8 +59,8 @@ function init() {
         '    </button>';
 
 
-    addLink(content, chrome.extension.getURL("statics/glyphicon.css"));
-    addLink(content, chrome.extension.getURL("fullscreenbutton.css"));
+    addLink(content, "statics/glyphicon.css");
+    addLink(content, "fullscreenbutton.css");
     //
     addBanner(content, serviceId);
     //
@@ -73,8 +73,8 @@ function init() {
     //alert('jello'+serviceId);
 
 
-    document.getElementById('fullScreenButton').onclick = function(element) {
-        let iFrame  = document.getElementById("actionFrame");
+    document.getElementById('fullScreenButton').onclick = function (element) {
+        let iFrame = document.getElementById("actionFrame");
         const status = this.getAttribute('data-status');
         if (status == 'not-fulled') {
             content.style.top = "0px";
@@ -100,11 +100,11 @@ function addLink(content, url) {
     content.appendChild(link);
 }
 
-function smoothscroll(){
+function smoothscroll() {
     var currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
     if (currentScroll > 0) {
         window.requestAnimationFrame(smoothscroll);
-        window.scrollTo (0,currentScroll - (currentScroll/5));
+        window.scrollTo(0, currentScroll - (currentScroll / 5));
     }
 }
 
@@ -137,7 +137,7 @@ function stopJob(request, onComplete, onFail) {
             }
         }
 
-        xhttp.onerror = function(e){
+        xhttp.onerror = function (e) {
             if (typeof onFail === "function") {
                 onFail('Unknown Error Occured. Server response not received.');
             }
@@ -181,7 +181,7 @@ function startJob(request, onComplete, onFail) {
             }
         }
 
-        xhttp.onerror = function(e){
+        xhttp.onerror = function (e) {
             if (typeof onFail === "function") {
                 onFail('Unknown Error Occured. Server response not received.');
             }
@@ -221,7 +221,7 @@ function saveFile(request, onComplete, onFail) {
             }
         }
 
-        xhttp.onerror = function(e){
+        xhttp.onerror = function (e) {
             if (typeof onFail === "function") {
                 onFail('Unknown Error Occured. Server response not received.');
             }

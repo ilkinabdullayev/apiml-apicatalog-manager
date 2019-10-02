@@ -12,8 +12,8 @@ function init() {
             '                    &nbsp;\n' +
             '                    Configuration is needed';
 
-        button.onclick = function(){
-            chrome.tabs.update({ 'url': 'chrome://extensions/?options=' + chrome.runtime.id });
+        button.onclick = function () {
+            chrome.tabs.update({'url': 'chrome://extensions/?options=' + chrome.runtime.id});
         };
 
         NAVIGATE_BUTTONS.appendChild(button);
@@ -29,11 +29,12 @@ function init() {
         button.setAttribute('style', 'width: 100%;margin-bottom: 5px');
         button.innerText = hosts[i].gatewayUrl;
 
-        button.onclick = function(){
-            chrome.tabs.update(null, { url: this.getAttribute('data-url') + '/ui/v1/apicatalog'});
+        button.onclick = function () {
+            chrome.tabs.update(null, {url: this.getAttribute('data-url') + '/ui/v1/apicatalog'});
         };
 
         NAVIGATE_BUTTONS.appendChild(button);
     }
 }
+
 init();
